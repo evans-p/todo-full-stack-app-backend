@@ -7,6 +7,11 @@ public class ValidationConstants {
   public static final String USER_ID_NULL = "User id should not be null.";
 
   /**
+   * Created date null.
+   */
+  public static final String USER_ID_GREATER_THAN_ZERO = "User Id must be positive.";
+
+  /**
    * Email empty.
    */
   public static final String EMAIL_EMPTY = "Email should not be empty.";
