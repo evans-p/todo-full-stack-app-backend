@@ -1,6 +1,5 @@
 # TODO Full Stack App Backend
 
-
 ## Class Diagram
 
 ```mermaid
@@ -9,7 +8,7 @@ classDiagram
         -Long userId
         -String email
         -String password
-        -LocalDate created
+        -LocalDateTime created
         -Set~Todo~ favoriteTodos
         -Set~TodoList~ todoLists
     }
@@ -17,8 +16,8 @@ classDiagram
         -Long userId
         -Long todoListId
         -String title
-        -LocalDate created
-        -LocalDate lastModified
+        -LocalDateTime created
+        -LocalDateTime lastModified
         -Set~Todo~ todos
     }
     class Todo {
@@ -27,8 +26,8 @@ classDiagram
         -Long todoListId
         -String title
         -String body
-        -LocalDate created
-        -LocalDate lastModified
+        -LocalDateTime created
+        -LocalDateTime lastModified
     }
     User --> TodoList
     User --> Todo
