@@ -4,12 +4,12 @@ public class ValidationConstants {
   /**
    * User Id null
    */
-  public static final String USER_ID_NULL = "User id should not be null.";
+  public static final String ID_NULL = "User id should not be null.";
 
   /**
    * Created date null.
    */
-  public static final String USER_ID_GREATER_THAN_ZERO = "User Id must be positive.";
+  public static final String ID_GREATER_THAN_ZERO = "Id must be positive.";
 
   /**
    * Email empty.
@@ -35,6 +35,16 @@ public class ValidationConstants {
    * Created date null.
    */
   public static final String CREATE_DATE_NULL = "Created date should not be null.";
+
+  /**
+   * Created date null.
+   */
+  public static final String LAST_MODIFIED_DATE_NULL = "Last modified date should not be null.";
+
+  /**
+   * Created date null.
+   */
+  public static final String TITLE_NULL = "Title should not be null.";
 
   private ValidationConstants() {
     //Private No args constructor.
