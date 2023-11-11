@@ -42,7 +42,7 @@ public class UserImpl implements User {
   @lombok.NonNull
   private String password;
 
-  @Column(name = "CREATED")
+  @Column(name = "CREATED", nullable = false)
   @NotNull(message = ValidationConstants.CREATE_DATE_NULL)
   private LocalDateTime created = LocalDateTime.now();
 }
