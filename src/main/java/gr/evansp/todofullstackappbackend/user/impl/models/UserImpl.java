@@ -28,22 +28,22 @@ public class UserImpl implements User {
   @NotNull(message = ValidationConstants.USER_ID_NULL)
   @Min(value = 1L)
   @EqualsAndHashCode.Include
-  Long userId;
+  private Long userId;
 
   @Column(name = "EMAIL", unique = true, nullable = false)
   @NotEmpty(message = ValidationConstants.EMAIL_EMPTY)
   @Email(message = ValidationConstants.EMAIL_VALID)
   @lombok.NonNull
-  String email;
+  private String email;
 
   @NotNull(message = ValidationConstants.PASSWORD_NULL)
   @Size(min = 8, message = ValidationConstants.PASSWORD_SHORT)
   @Column(name = "PASSWORD", nullable = false)
   @lombok.NonNull
-  String password;
+  private String password;
 
   @Column(name = "CREATED")
   @NotNull(message = ValidationConstants.CREATE_DATE_NULL)
   @lombok.NonNull
-  LocalDateTime created = LocalDateTime.now();
+  private LocalDateTime created = LocalDateTime.now();
 }

@@ -1,9 +1,11 @@
 package gr.evansp.todofullstackappbackend.user.def.models;
 
+import java.io.Serializable;
+
 /**
  * User primary key
  */
-public interface UserPK {
+public interface UserPK extends Serializable {
   /**
    * Getter for userId.
    *
