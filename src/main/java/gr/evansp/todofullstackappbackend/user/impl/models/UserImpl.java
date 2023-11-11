@@ -24,7 +24,7 @@ public class UserImpl implements User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "USER_ID")
+  @Column(name = "USER_ID", nullable = false)
   @NotNull(message = ValidationConstants.USER_ID_NULL)
   @Min(value = 1L)
   @EqualsAndHashCode.Include
