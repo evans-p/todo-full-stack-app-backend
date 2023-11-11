@@ -24,7 +24,7 @@ public class UserImpl implements User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "ID")
+  @Column(name = "USER_ID")
   @NotNull(message = ValidationConstants.USER_ID_NULL)
   @Min(value = 1L)
   @EqualsAndHashCode.Include
@@ -44,6 +44,5 @@ public class UserImpl implements User {
 
   @Column(name = "CREATED")
   @NotNull(message = ValidationConstants.CREATE_DATE_NULL)
-  @lombok.NonNull
   private LocalDateTime created = LocalDateTime.now();
 }
