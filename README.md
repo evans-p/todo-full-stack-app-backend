@@ -23,7 +23,7 @@ classDiagram
     class Todo {
         -Long userId
         -Long todoListId
-        -Long todoListId
+        -Long todoId
         -String title
         -String body
         -LocalDateTime created
