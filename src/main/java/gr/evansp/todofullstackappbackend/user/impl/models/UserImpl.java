@@ -30,7 +30,7 @@ public class UserImpl implements User {
   @EqualsAndHashCode.Include
   Long userId;
 
-  @Column(name = "EMAIL", unique = true)
+  @Column(name = "EMAIL", unique = true, nullable = false)
   @NotEmpty(message = ValidationConstants.EMAIL_EMPTY)
   @Email(message = ValidationConstants.EMAIL_VALID)
   @lombok.NonNull
@@ -38,7 +38,7 @@ public class UserImpl implements User {
 
   @NotNull(message = ValidationConstants.PASSWORD_NULL)
   @Size(min = 8, message = ValidationConstants.PASSWORD_SHORT)
-  @Column(name = "PASSWORD")
+  @Column(name = "PASSWORD", nullable = false)
   @lombok.NonNull
   String password;
 
