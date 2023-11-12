@@ -20,6 +20,7 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
+@ToString
 @Entity
 @Table(name = "TBTODOLIST")
 @IdClass(TodoListImpl.class)
@@ -33,11 +34,11 @@ public class TodoListImpl implements TodoList {
   private Long userId;
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "LIST_ID", nullable = false)
   @EqualsAndHashCode.Include
   @NotNull(message = ValidationConstants.ID_NULL)
   @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
-  @lombok.NonNull
   private Long todoListId;
 
   @Column(name = "TITLE", nullable = false)
