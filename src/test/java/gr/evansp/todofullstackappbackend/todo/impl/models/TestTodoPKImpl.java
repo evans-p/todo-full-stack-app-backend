@@ -1,33 +1,33 @@
 package gr.evansp.todofullstackappbackend.todo.impl.models;
 
-import gr.evansp.todofullstackappbackend.todo.def.models.TodoListPK;
+import gr.evansp.todofullstackappbackend.todo.def.models.TodoPK;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for {@link TodoListPKImpl}
+ * Unit Tests for {@link TodoPKImpl}.
  */
-class TestTodoListPKImpl {
+class TestTodoPKImpl {
 
   /**
    * Subject under test.
    */
-  TodoListPK pk;
+  TodoPK pk;
 
   /**
    * Initialization.
    */
   @BeforeEach
   public void setup() {
-    pk = new TodoListPKImpl();
+    pk = new TodoPKImpl();
   }
 
 
   @Test
   void testRequiredArgsConstructor() {
-    TodoListPK list = new TodoListPKImpl(1L, 1L);
+    TodoPK list = new TodoPKImpl(1L, 1L, 1L);
     assertNotNull(list);
   }
 
@@ -43,6 +43,12 @@ class TestTodoListPKImpl {
     assertEquals(1L, pk.getTodoListId());
   }
 
+  @Test
+  void testSetTodoId() {
+    pk.setTodoId(1L);
+    assertEquals(1L, pk.getTodoId());
+  }
+
 
   @Test
   void testToString() {
@@ -51,34 +57,30 @@ class TestTodoListPKImpl {
 
   @Test
   void testEquals_false() {
-    TodoListPK pk1 = new TodoListPKImpl();
+    TodoPK pk1 = new TodoPKImpl();
     pk1.setUserId(1L);
     pk1.setTodoListId(1L);
+    pk1.setTodoId(1L);
 
-    TodoListPK pk2 = new TodoListPKImpl();
+    TodoPK pk2 = new TodoPKImpl();
     pk2.setUserId(1L);
     pk2.setTodoListId(2L);
-
-    assertNotEquals(pk1, pk2);
-
-    pk1.setUserId(1L);
-    pk1.setTodoListId(2L);
-
-    pk2.setUserId(1L);
-    pk2.setTodoListId(1L);
+    pk2.setTodoId(1L);
 
     assertNotEquals(pk1, pk2);
   }
 
   @Test
   void testEquals_true() {
-    TodoListPK pk1 = new TodoListPKImpl();
+    TodoPK pk1 = new TodoPKImpl();
     pk1.setUserId(1L);
     pk1.setTodoListId(1L);
+    pk1.setTodoId(1L);
 
-    TodoListPK pk2 = new TodoListPKImpl();
+    TodoPK pk2 = new TodoPKImpl();
     pk2.setUserId(1L);
     pk2.setTodoListId(1L);
+    pk2.setTodoId(1L);
 
     assertEquals(pk1, pk2);
   }

@@ -9,10 +9,16 @@ import lombok.*;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TodoPKImpl implements TodoPK {
+  @EqualsAndHashCode.Include
   private Long userId;
+
+  @EqualsAndHashCode.Include
   private Long todoListId;
+
+  @EqualsAndHashCode.Include
   private Long todoId;
 }
