@@ -24,7 +24,7 @@ public class TodoImpl implements Todo {
   @NotNull(message = ValidationConstants.ID_NULL)
   @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
   @lombok.NonNull
-  Long userId;
+  private Long userId;
 
   @Id
   @Column(name = "LIST_ID", nullable = false)
@@ -32,7 +32,7 @@ public class TodoImpl implements Todo {
   @NotNull(message = ValidationConstants.ID_NULL)
   @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
   @lombok.NonNull
-  Long todoListId;
+  private Long todoListId;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,22 +40,22 @@ public class TodoImpl implements Todo {
   @NotNull(message = ValidationConstants.ID_NULL)
   @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
   @EqualsAndHashCode.Include
-  Long todoId;
+  private Long todoId;
 
   @Column(name = "TITLE", nullable = false)
   @NotNull(message = ValidationConstants.TITLE_NULL)
   @lombok.NonNull
-  String title;
+  private String title;
 
   @Column(name = "BODY")
   @lombok.NonNull
-  String body;
+  private String body;
 
   @Column(name = "CREATED", nullable = false)
   @NotNull(message = ValidationConstants.CREATE_DATE_NULL)
-  LocalDateTime created = LocalDateTime.now();
+  private LocalDateTime created = LocalDateTime.now();
 
   @Column(name = "LAST_MODIFIED", nullable = false)
   @NotNull(message = ValidationConstants.LAST_MODIFIED_DATE_NULL)
-  LocalDateTime lastModified = LocalDateTime.now();
+  private LocalDateTime lastModified = LocalDateTime.now();
 }
