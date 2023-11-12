@@ -9,9 +9,13 @@ import lombok.*;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TodoListPKImpl implements TodoListPK {
+  @EqualsAndHashCode.Include
   private Long userId;
+
+  @EqualsAndHashCode.Include
   private Long todoListId;
 }
