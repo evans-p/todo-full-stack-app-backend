@@ -5,6 +5,7 @@ import gr.evansp.todofullstackappbackend.todo.def.models.Todo;
 import gr.evansp.todofullstackappbackend.todo.def.models.TodoList;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -42,7 +43,7 @@ public class TodoListImpl implements TodoList {
   private Long todoListId;
 
   @Column(name = "TITLE", nullable = false)
-  @NotNull(message = ValidationConstants.TITLE_NULL)
+  @NotEmpty(message = ValidationConstants.TITLE_EMPTY)
   @lombok.NonNull
   private String title;
 

@@ -42,9 +42,15 @@ public class ValidationConstants {
   public static final String LAST_MODIFIED_DATE_NULL = "Last modified date should not be null.";
 
   /**
-   * Created date null.
+   * Title null.
    */
   public static final String TITLE_NULL = "Title should not be null.";
+
+  /**
+   * Title empty.
+   */
+  public static final String TITLE_EMPTY = "Title should not be empty.";
+
 
   private ValidationConstants() {
     //Private No args constructor.
