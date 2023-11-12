@@ -30,7 +30,7 @@ class TestUserImpl {
   }
 
   @Test
-  void testAllArgsConstructor() {
+  void testRequiredArgsConstructor() {
     user = new UserImpl("example@example.com", "123");
     assertNotNull(user);
   }
