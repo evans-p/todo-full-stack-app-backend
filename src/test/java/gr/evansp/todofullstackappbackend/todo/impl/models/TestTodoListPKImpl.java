@@ -81,6 +81,5 @@ class TestTodoListPKImpl {
     pk2.setTodoListId(1L);
 
     assertEquals(pk1, pk2);
-
   }
 }
