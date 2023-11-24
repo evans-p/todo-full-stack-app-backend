@@ -1,16 +1,11 @@
-package gr.evansp.todofullstackappbackend.user.models.impl;
+package gr.evansp.todofullstackappbackend.user.models;
 
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
-import gr.evansp.todofullstackappbackend.user.models.def.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-
-/**
- * Implementation of {@link User}.
- */
 
 @Getter
 @Setter
@@ -20,7 +15,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Entity
 @Table(schema = "TODO", name = "TBUSER")
-public class UserImpl implements User {
+public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

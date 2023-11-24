@@ -1,16 +1,14 @@
-package gr.evansp.todofullstackappbackend.todo.impl.models;
+package gr.evansp.todofullstackappbackend.todo.models;
 
-import gr.evansp.todofullstackappbackend.todo.models.def.TodoPK;
-import gr.evansp.todofullstackappbackend.todo.models.impl.TodoPKImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit Tests for {@link TodoPKImpl}.
+ * Unit Tests for {@link TodoPK}.
  */
-class TestTodoPKImpl {
+class TestTodoPK {
 
   /**
    * Subject under test.
@@ -22,13 +20,13 @@ class TestTodoPKImpl {
    */
   @BeforeEach
   public void setup() {
-    pk = new TodoPKImpl();
+    pk = new TodoPK();
   }
 
 
   @Test
   void testRequiredArgsConstructor() {
-    TodoPK list = new TodoPKImpl(1L, 1L, 1L);
+    TodoPK list = new TodoPK(1L, 1L, 1L);
     assertNotNull(list);
   }
 
@@ -58,12 +56,12 @@ class TestTodoPKImpl {
 
   @Test
   void testEquals_false() {
-    TodoPK pk1 = new TodoPKImpl();
+    TodoPK pk1 = new TodoPK();
     pk1.setUserId(1L);
     pk1.setTodoListId(1L);
     pk1.setTodoId(1L);
 
-    TodoPK pk2 = new TodoPKImpl();
+    TodoPK pk2 = new TodoPK();
     pk2.setUserId(1L);
     pk2.setTodoListId(2L);
     pk2.setTodoId(1L);
@@ -73,12 +71,12 @@ class TestTodoPKImpl {
 
   @Test
   void testEquals_true() {
-    TodoPK pk1 = new TodoPKImpl();
+    TodoPK pk1 = new TodoPK();
     pk1.setUserId(1L);
     pk1.setTodoListId(1L);
     pk1.setTodoId(1L);
 
-    TodoPK pk2 = new TodoPKImpl();
+    TodoPK pk2 = new TodoPK();
     pk2.setUserId(1L);
     pk2.setTodoListId(1L);
     pk2.setTodoId(1L);

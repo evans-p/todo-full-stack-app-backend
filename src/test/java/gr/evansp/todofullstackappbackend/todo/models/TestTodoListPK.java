@@ -1,16 +1,15 @@
-package gr.evansp.todofullstackappbackend.todo.impl.models;
+package gr.evansp.todofullstackappbackend.todo.models;
 
-import gr.evansp.todofullstackappbackend.todo.models.def.TodoListPK;
-import gr.evansp.todofullstackappbackend.todo.models.impl.TodoListPKImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * Unit tests for {@link TodoListPKImpl}
+ * Unit tests for {@link TodoListPK}
  */
-class TestTodoListPKImpl {
+class TestTodoListPK {
 
   /**
    * Subject under test.
@@ -22,26 +21,26 @@ class TestTodoListPKImpl {
    */
   @BeforeEach
   public void setup() {
-    pk = new TodoListPKImpl();
+    pk = new TodoListPK();
   }
 
 
   @Test
   void testRequiredArgsConstructor() {
-    TodoListPK list = new TodoListPKImpl(1L, 1L);
+    TodoListPK list = new TodoListPK(1L, 1L);
     assertNotNull(list);
   }
 
   @Test
   void testSetUserId() {
     pk.setUserId(1L);
-    assertEquals(1L, pk.getUserId());
+    Assertions.assertEquals(1L, (long) pk.getUserId());
   }
 
   @Test
   void testSetTodoListId() {
     pk.setTodoListId(1L);
-    assertEquals(1L, pk.getTodoListId());
+    Assertions.assertEquals(1L, (long) pk.getTodoListId());
   }
 
 
@@ -52,15 +51,15 @@ class TestTodoListPKImpl {
 
   @Test
   void testEquals_false() {
-    TodoListPK pk1 = new TodoListPKImpl();
+    TodoListPK pk1 = new TodoListPK();
     pk1.setUserId(1L);
     pk1.setTodoListId(1L);
 
-    TodoListPK pk2 = new TodoListPKImpl();
+    TodoListPK pk2 = new TodoListPK();
     pk2.setUserId(1L);
     pk2.setTodoListId(2L);
 
-    assertNotEquals(pk1, pk2);
+    Assertions.assertNotEquals(pk1, pk2);
 
     pk1.setUserId(1L);
     pk1.setTodoListId(2L);
@@ -68,19 +67,19 @@ class TestTodoListPKImpl {
     pk2.setUserId(1L);
     pk2.setTodoListId(1L);
 
-    assertNotEquals(pk1, pk2);
+    Assertions.assertNotEquals(pk1, pk2);
   }
 
   @Test
   void testEquals_true() {
-    TodoListPK pk1 = new TodoListPKImpl();
+    TodoListPK pk1 = new TodoListPK();
     pk1.setUserId(1L);
     pk1.setTodoListId(1L);
 
-    TodoListPK pk2 = new TodoListPKImpl();
+    TodoListPK pk2 = new TodoListPK();
     pk2.setUserId(1L);
     pk2.setTodoListId(1L);
 
-    assertEquals(pk1, pk2);
+    Assertions.assertEquals(pk1, pk2);
   }
 }

@@ -1,10 +1,7 @@
-package gr.evansp.todofullstackappbackend.todo.impl.models;
+package gr.evansp.todofullstackappbackend.todo.models;
 
 import gr.evansp.todofullstackappbackend.common.constants.StringConstants;
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
-import gr.evansp.todofullstackappbackend.todo.models.def.Todo;
-import gr.evansp.todofullstackappbackend.todo.models.def.TodoList;
-import gr.evansp.todofullstackappbackend.todo.models.impl.TodoListImpl;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -20,9 +17,9 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for {@link TodoListImpl}.
+ * Unit tests for {@link TodoList}.
  */
-class TestTodoListImpl {
+class TestTodoList {
 
   /**
    * Subject under test.
@@ -34,12 +31,12 @@ class TestTodoListImpl {
    */
   @BeforeEach
   public void setup() {
-    list = new TodoListImpl();
+    list = new TodoList();
   }
 
   @Test
   void testRequiredArgsConstructor() {
-    TodoList list = new TodoListImpl(1L, "sample list");
+    TodoList list = new TodoList(1L, "sample list");
     assertNotNull(list);
   }
 
@@ -89,11 +86,11 @@ class TestTodoListImpl {
 
   @Test
   void testEquals_false() {
-    TodoList list1 = new TodoListImpl();
+    TodoList list1 = new TodoList();
     list1.setUserId(1L);
     list1.setTodoListId(1L);
 
-    TodoList list2 = new TodoListImpl();
+    TodoList list2 = new TodoList();
     list2.setUserId(1L);
     list2.setTodoListId(2L);
 
@@ -110,11 +107,11 @@ class TestTodoListImpl {
 
   @Test
   void testEquals_true() {
-    TodoList list1 = new TodoListImpl();
+    TodoList list1 = new TodoList();
     list1.setUserId(1L);
     list1.setTodoListId(1L);
 
-    TodoList list2 = new TodoListImpl();
+    TodoList list2 = new TodoList();
     list2.setUserId(1L);
     list2.setTodoListId(1L);
 

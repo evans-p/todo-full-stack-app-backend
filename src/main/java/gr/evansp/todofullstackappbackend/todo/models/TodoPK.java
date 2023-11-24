@@ -1,21 +1,20 @@
-package gr.evansp.todofullstackappbackend.todo.models.impl;
+package gr.evansp.todofullstackappbackend.todo.models;
 
-import gr.evansp.todofullstackappbackend.todo.models.def.TodoListPK;
 import lombok.*;
 
-/**
- * Implementation of {@link TodoListPK}.
- */
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class TodoListPKImpl implements TodoListPK {
+public class TodoPK {
   @EqualsAndHashCode.Include
   private Long userId;
 
   @EqualsAndHashCode.Include
   private Long todoListId;
+
+  @EqualsAndHashCode.Include
+  private Long todoId;
 }

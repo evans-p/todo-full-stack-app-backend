@@ -1,9 +1,7 @@
-package gr.evansp.todofullstackappbackend.user.impl.models;
+package gr.evansp.todofullstackappbackend.user.models;
 
 import gr.evansp.todofullstackappbackend.common.constants.StringConstants;
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
-import gr.evansp.todofullstackappbackend.user.models.def.User;
-import gr.evansp.todofullstackappbackend.user.models.impl.UserImpl;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -18,21 +16,21 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for {@link UserImpl}.
+ * Unit tests for {@link User}.
  */
-class TestUserImpl {
+class TestUser {
 
   User user;
 
   @BeforeEach
   public void setup() {
-    user = new UserImpl();
+    user = new User();
     user.setUserId(1L);
   }
 
   @Test
   void testRequiredArgsConstructor() {
-    user = new UserImpl("example@example.com", "123");
+    user = new User("example@example.com", "123");
     assertNotNull(user);
   }
 
@@ -206,14 +204,14 @@ class TestUserImpl {
 
   @Test
   void testEquals_true() {
-    User user1 = new UserImpl();
+    User user1 = new User();
 
     user1.setUserId(1L);
     user1.setPassword("1234567891");
     user1.setEmail("example1@example.com");
     user1.setCreated(LocalDateTime.now());
 
-    User user2 = new UserImpl();
+    User user2 = new User();
 
     user2.setUserId(1L);
     user2.setPassword("1234567892");
@@ -225,14 +223,14 @@ class TestUserImpl {
 
   @Test
   void testEquals_false() {
-    User user1 = new UserImpl();
+    User user1 = new User();
 
     user1.setUserId(1L);
     user1.setPassword("1234567891");
     user1.setEmail("example1@example.com");
     user1.setCreated(LocalDateTime.now());
 
-    User user2 = new UserImpl();
+    User user2 = new User();
 
     user2.setUserId(2L);
     user2.setPassword("1234567891");

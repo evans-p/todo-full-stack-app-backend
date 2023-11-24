@@ -1,8 +1,6 @@
-package gr.evansp.todofullstackappbackend.todo.impl.models;
+package gr.evansp.todofullstackappbackend.todo.models;
 
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
-import gr.evansp.todofullstackappbackend.todo.models.def.Todo;
-import gr.evansp.todofullstackappbackend.todo.models.impl.TodoImpl;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -17,9 +15,9 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for {@link TodoImpl}.
+ * Unit tests for Todo1.
  */
-class TestTodoImpl {
+class TestTodo {
   /**
    * Subject under test.
    */
@@ -30,12 +28,12 @@ class TestTodoImpl {
    */
   @BeforeEach
   public void setup() {
-    todo = new TodoImpl();
+    todo = new Todo();
   }
 
   @Test
   void testRequiredArgsConstructor() {
-    Todo todo = new TodoImpl(1L, 1L, "title", "body");
+    Todo todo = new Todo(1L, 1L, "title", "body");
     assertNotNull(todo);
   }
 
@@ -90,12 +88,12 @@ class TestTodoImpl {
 
   @Test
   void testEquals_false() {
-    Todo todo1 = new TodoImpl();
+    Todo todo1 = new Todo();
     todo1.setUserId(1L);
     todo1.setTodoListId(1L);
     todo1.setTodoId(1L);
 
-    Todo todo2 = new TodoImpl();
+    Todo todo2 = new Todo();
     todo2.setUserId(1L);
     todo2.setTodoListId(2L);
     todo2.setTodoId(1L);
@@ -105,12 +103,12 @@ class TestTodoImpl {
 
   @Test
   void testEquals_true() {
-    Todo todo1 = new TodoImpl();
+    Todo todo1 = new Todo();
     todo1.setUserId(1L);
     todo1.setTodoListId(1L);
     todo1.setTodoId(1L);
 
-    Todo todo2 = new TodoImpl();
+    Todo todo2 = new Todo();
     todo2.setUserId(1L);
     todo2.setTodoListId(1L);
     todo2.setTodoId(1L);
