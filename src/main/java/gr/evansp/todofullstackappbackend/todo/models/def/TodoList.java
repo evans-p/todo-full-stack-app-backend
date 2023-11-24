@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.todo.def.models;
+package gr.evansp.todofullstackappbackend.todo.models.def;
 
 import gr.evansp.todofullstackappbackend.common.beans.CreationDateOwner;
 import gr.evansp.todofullstackappbackend.common.beans.ModificationDateOwner;

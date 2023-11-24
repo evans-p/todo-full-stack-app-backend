@@ -1,7 +1,7 @@
-package gr.evansp.todofullstackappbackend.todo.impl.models;
+package gr.evansp.todofullstackappbackend.todo.models.impl;
 
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
-import gr.evansp.todofullstackappbackend.todo.def.models.Todo;
+import gr.evansp.todofullstackappbackend.todo.models.def.Todo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "TBTODO")
+@Table(schema = "TODO", name = "TBTODO")
 @IdClass(TodoPKImpl.class)
 public class TodoImpl implements Todo {
   @Id

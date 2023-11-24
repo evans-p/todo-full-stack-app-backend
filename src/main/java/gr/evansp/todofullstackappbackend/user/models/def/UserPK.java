@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.user.def.models;
+package gr.evansp.todofullstackappbackend.user.models.def;
 
 import java.io.Serializable;
 

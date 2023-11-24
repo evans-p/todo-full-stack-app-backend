@@ -1,8 +1,8 @@
-package gr.evansp.todofullstackappbackend.todo.impl.models;
+package gr.evansp.todofullstackappbackend.todo.models.impl;
 
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
-import gr.evansp.todofullstackappbackend.todo.def.models.Todo;
-import gr.evansp.todofullstackappbackend.todo.def.models.TodoList;
+import gr.evansp.todofullstackappbackend.todo.models.def.Todo;
+import gr.evansp.todofullstackappbackend.todo.models.def.TodoList;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -23,8 +23,8 @@ import java.util.Set;
 @RequiredArgsConstructor
 @ToString
 @Entity
-@Table(name = "TBTODOLIST")
-@IdClass(TodoListImpl.class)
+@Table(schema = "TODO", name = "TBTODOLIST")
+@IdClass(TodoListPKImpl.class)
 public class TodoListImpl implements TodoList {
   @Id
   @Column(name = "USER_ID", nullable = false)
@@ -55,7 +55,6 @@ public class TodoListImpl implements TodoList {
   @NotNull(message = ValidationConstants.LAST_MODIFIED_DATE_NULL)
   private LocalDateTime lastModified = LocalDateTime.now();
 
-  @OneToMany(cascade = CascadeType.ALL)
-  @JoinColumn(name = "LIST_ID")
+  @OneToMany(targetEntity = TodoImpl.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private Set<Todo> todos = new HashSet<>();
 }

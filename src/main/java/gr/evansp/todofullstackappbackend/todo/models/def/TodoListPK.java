@@ -1,6 +1,6 @@
-package gr.evansp.todofullstackappbackend.todo.def.models;
+package gr.evansp.todofullstackappbackend.todo.models.def;
 
-import gr.evansp.todofullstackappbackend.user.def.models.UserPK;
+import gr.evansp.todofullstackappbackend.user.models.def.UserPK;
 
 import java.io.Serializable;
 

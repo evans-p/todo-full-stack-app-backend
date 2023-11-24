@@ -1,7 +1,7 @@
-package gr.evansp.todofullstackappbackend.user.impl.models;
+package gr.evansp.todofullstackappbackend.user.models.impl;
 
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
-import gr.evansp.todofullstackappbackend.user.def.models.User;
+import gr.evansp.todofullstackappbackend.user.models.def.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-@Table(name = "TBUSER")
+@Table(schema = "TODO", name = "TBUSER")
 public class UserImpl implements User {
 
   @Id

@@ -1,7 +1,8 @@
 package gr.evansp.todofullstackappbackend.todo.impl.models;
 
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
-import gr.evansp.todofullstackappbackend.todo.def.models.Todo;
+import gr.evansp.todofullstackappbackend.todo.models.def.Todo;
+import gr.evansp.todofullstackappbackend.todo.models.impl.TodoImpl;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

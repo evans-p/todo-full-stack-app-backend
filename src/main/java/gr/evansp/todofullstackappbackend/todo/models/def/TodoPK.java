@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.todo.def.models;
+package gr.evansp.todofullstackappbackend.todo.models.def;
 
 /**
  * Primary key of a todo1.

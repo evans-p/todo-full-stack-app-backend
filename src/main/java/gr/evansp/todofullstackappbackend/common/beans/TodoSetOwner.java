@@ -1,6 +1,6 @@
 package gr.evansp.todofullstackappbackend.common.beans;
 
-import gr.evansp.todofullstackappbackend.todo.def.models.Todo;
+import gr.evansp.todofullstackappbackend.todo.models.def.Todo;
 
 import java.util.Set;
 

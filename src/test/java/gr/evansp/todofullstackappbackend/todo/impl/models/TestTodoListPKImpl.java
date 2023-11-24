@@ -1,6 +1,7 @@
 package gr.evansp.todofullstackappbackend.todo.impl.models;
 
-import gr.evansp.todofullstackappbackend.todo.def.models.TodoListPK;
+import gr.evansp.todofullstackappbackend.todo.models.def.TodoListPK;
+import gr.evansp.todofullstackappbackend.todo.models.impl.TodoListPKImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

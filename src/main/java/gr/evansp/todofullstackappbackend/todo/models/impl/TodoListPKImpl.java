@@ -1,6 +1,6 @@
-package gr.evansp.todofullstackappbackend.todo.impl.models;
+package gr.evansp.todofullstackappbackend.todo.models.impl;
 
-import gr.evansp.todofullstackappbackend.todo.def.models.TodoListPK;
+import gr.evansp.todofullstackappbackend.todo.models.def.TodoListPK;
 import lombok.*;
 
 /**
