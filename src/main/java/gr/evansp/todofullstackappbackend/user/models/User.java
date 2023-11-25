@@ -20,7 +20,6 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "USER_ID", nullable = false)
-  @NotNull(message = ValidationConstants.ID_NULL)
   @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
   @EqualsAndHashCode.Include
   private Long userId;
