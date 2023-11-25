@@ -7,6 +7,7 @@
 3. Internationalize Exceptions.
 4. Add Custom Exceptions.
 5. Add Global REST Exception Handler.
+6. Check for potentially problematic behaviour when you call update or delete, and TodoList ID is null.
 
 ## Class Diagram
 
