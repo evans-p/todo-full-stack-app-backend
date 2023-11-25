@@ -1,11 +1,14 @@
 package gr.evansp.todofullstackappbackend.user.models;
 
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
+import gr.evansp.todofullstackappbackend.todo.models.TodoList;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -39,4 +42,8 @@ public class User {
   @Column(name = "CREATED", nullable = false)
   @NotNull(message = ValidationConstants.CREATE_DATE_NULL)
   private LocalDateTime created = LocalDateTime.now();
+
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "USER_ID")
+  private Set<TodoList> todoLists = new HashSet<>();
 }

@@ -2,6 +2,7 @@ package gr.evansp.todofullstackappbackend.user.models;
 
 import gr.evansp.todofullstackappbackend.common.constants.StringConstants;
 import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
+import gr.evansp.todofullstackappbackend.todo.models.TodoList;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,6 +59,13 @@ class TestUser {
   void testSetPassword() {
     user.setPassword("123");
     assertEquals("123", user.getPassword());
+  }
+
+  @Test
+  void testSetTodoList() {
+    Set<TodoList> todoLists = new HashSet<>();
+    user.setTodoLists(todoLists);
+    assertSame(todoLists, user.getTodoLists());
   }
 
   @Test
