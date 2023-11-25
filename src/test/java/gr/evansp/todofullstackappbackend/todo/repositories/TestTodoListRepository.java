@@ -29,10 +29,8 @@ class TestTodoListRepository {
   private final List<TodoList> todoLists = new ArrayList<>();
   @Autowired
   TodoListRepository repository;
-
   @Autowired
   UserRepository userRepository;
-
   private User user;
 
   @BeforeEach
