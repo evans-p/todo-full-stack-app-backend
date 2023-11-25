@@ -21,6 +21,11 @@ class TestStringUtils {
   }
 
   @Test
+  void TestGenerateRandomString_lengthTooBig() {
+    assertThrows(IllegalArgumentException.class, () -> StringUtils.generateRandomString(10000));
+  }
+
+  @Test
   void TestGenerateRandomString_ok() {
     assertNotNull(StringUtils.generateRandomString(1));
   }

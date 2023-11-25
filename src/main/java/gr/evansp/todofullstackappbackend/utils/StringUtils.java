@@ -19,7 +19,8 @@ public class StringUtils {
   }
 
   /**
-   * Generates a random string of specified length.
+   * Generates a random string of specified length. Length must be greater than zero and smaller than 512.
+   * (0 < length <= 512).
    *
    * @param length length
    * @return String
@@ -27,6 +28,9 @@ public class StringUtils {
   public static String generateRandomString(int length) {
     if (length <= 0) {
       throw new IllegalArgumentException("Length must be positive");
+    }
+    if (length >= 512) {
+      throw new IllegalArgumentException("Length must be less than 512");
     }
 
     StringBuilder salt = new StringBuilder();
