@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.user.repository;
+package gr.evansp.todofullstackappbackend.user.repositories;
 
 import gr.evansp.todofullstackappbackend.samples.Samples;
 import gr.evansp.todofullstackappbackend.user.models.User;

@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.todo.repository;
+package gr.evansp.todofullstackappbackend.todo.repositories;
 
 import gr.evansp.todofullstackappbackend.todo.models.TodoList;
 import org.springframework.data.jpa.repository.JpaRepository;
