@@ -20,23 +20,20 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(schema = "TODO", name = "TBTODOLIST")
-@IdClass(TodoListPK.class)
 public class TodoList {
-  @Id
-  @Column(name = "USER_ID", nullable = false)
-  @EqualsAndHashCode.Include
-  @NotNull(message = ValidationConstants.ID_NULL)
-  @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
-  @lombok.NonNull
-  private Long userId;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "LIST_ID", nullable = false)
   @EqualsAndHashCode.Include
-  @NotNull(message = ValidationConstants.ID_NULL)
   @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
   private Long todoListId;
+
+  @Column(name = "USER_ID", nullable = false)
+  @NotNull(message = ValidationConstants.ID_NULL)
+  @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
+  @lombok.NonNull
+  private Long userId;
 
   @Column(name = "TITLE", nullable = false)
   @NotEmpty(message = ValidationConstants.TITLE_EMPTY)
@@ -51,6 +48,7 @@ public class TodoList {
   @NotNull(message = ValidationConstants.LAST_MODIFIED_DATE_NULL)
   private LocalDateTime lastModified = LocalDateTime.now();
 
-  @OneToMany(targetEntity = Todo.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinColumn(name = "LIST_ID")
   private Set<Todo> todos = new HashSet<>();
 }

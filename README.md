@@ -21,16 +21,14 @@ classDiagram
         -Set~Todo~ todos
     }
     class Todo {
-        -Long userId
-        -Long todoListId
         -Long todoId
+        -Long todoListId
         -String title
         -String body
         -LocalDateTime created
         -LocalDateTime lastModified
     }
     User --> TodoList
-    User --> Todo
     TodoList --> Todo
 ```
 

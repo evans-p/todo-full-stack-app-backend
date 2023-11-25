@@ -175,24 +175,6 @@ class TestTodoList {
   }
 
   @Test
-  void testValidateTodoListId_null() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setUserId(1L);
-      list.setTitle("title");
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_NULL));
-    }
-  }
-
-  @Test
   void testValidateTodoListId_zero() {
     try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
       Validator validator = factory.getValidator();

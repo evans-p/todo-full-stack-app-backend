@@ -17,6 +17,6 @@ public class NumberUtils {
     if (max <= min) {
       throw new IllegalArgumentException("max must be greater than min.");
     }
-    return min + (random.nextLong() * (max - min));
+    return random.nextLong(min, max);
   }
 }

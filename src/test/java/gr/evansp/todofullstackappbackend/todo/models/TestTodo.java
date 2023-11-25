@@ -33,14 +33,8 @@ class TestTodo {
 
   @Test
   void testRequiredArgsConstructor() {
-    Todo todo = new Todo(1L, 1L, "title", "body");
+    Todo todo = new Todo(1L, "title", "body");
     assertNotNull(todo);
-  }
-
-  @Test
-  void testSetUserId() {
-    todo.setUserId(1L);
-    assertEquals(1L, todo.getUserId());
   }
 
   @Test
@@ -82,6 +76,12 @@ class TestTodo {
   }
 
   @Test
+  void testSetFavourite() {
+    todo.setFavourite(true);
+    assertEquals(true, todo.getFavourite());
+  }
+
+  @Test
   void testToString() {
     assertNotNull(todo.toString());
   }
@@ -89,14 +89,12 @@ class TestTodo {
   @Test
   void testEquals_false() {
     Todo todo1 = new Todo();
-    todo1.setUserId(1L);
     todo1.setTodoListId(1L);
     todo1.setTodoId(1L);
 
     Todo todo2 = new Todo();
-    todo2.setUserId(1L);
     todo2.setTodoListId(2L);
-    todo2.setTodoId(1L);
+    todo2.setTodoId(2L);
 
     assertNotEquals(todo1, todo2);
   }
@@ -104,78 +102,14 @@ class TestTodo {
   @Test
   void testEquals_true() {
     Todo todo1 = new Todo();
-    todo1.setUserId(1L);
     todo1.setTodoListId(1L);
     todo1.setTodoId(1L);
 
     Todo todo2 = new Todo();
-    todo2.setUserId(1L);
     todo2.setTodoListId(1L);
     todo2.setTodoId(1L);
 
     assertEquals(todo1, todo2);
-  }
-
-  @Test
-  void testValidateUserId_null() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      todo.setTodoId(1L);
-      todo.setTodoListId(1L);
-      todo.setTitle("title");
-      todo.setBody("Body");
-
-      Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_NULL));
-    }
-  }
-
-  @Test
-  void testValidateUserId_zero() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      todo.setUserId(0L);
-      todo.setTodoId(1L);
-      todo.setTodoListId(1L);
-      todo.setTitle("title");
-      todo.setBody("Body");
-
-      Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
-    }
-  }
-
-  @Test
-  void testValidateUserId_negative() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      todo.setUserId(-1L);
-      todo.setTodoId(1L);
-      todo.setTodoListId(1L);
-      todo.setTitle("title");
-      todo.setBody("Body");
-
-      Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
-    }
   }
 
   @Test
@@ -184,7 +118,6 @@ class TestTodo {
       Validator validator = factory.getValidator();
 
       todo.setTodoId(1L);
-      todo.setUserId(1L);
       todo.setTitle("title");
       todo.setBody("Body");
 
@@ -203,7 +136,6 @@ class TestTodo {
     try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
       Validator validator = factory.getValidator();
 
-      todo.setUserId(1L);
       todo.setTodoId(1L);
       todo.setTodoListId(0L);
       todo.setTitle("title");
@@ -224,7 +156,6 @@ class TestTodo {
     try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
       Validator validator = factory.getValidator();
 
-      todo.setUserId(1L);
       todo.setTodoId(1L);
       todo.setTodoListId(-1L);
       todo.setTitle("title");
@@ -240,33 +171,11 @@ class TestTodo {
     }
   }
 
-
-  @Test
-  void testValidateTodoId_null() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      todo.setTodoListId(1L);
-      todo.setUserId(1L);
-      todo.setTitle("title");
-      todo.setBody("Body");
-
-      Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_NULL));
-    }
-  }
-
   @Test
   void testValidateTodoId_zero() {
     try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
       Validator validator = factory.getValidator();
 
-      todo.setUserId(1L);
       todo.setTodoId(0L);
       todo.setTodoListId(1L);
       todo.setTitle("title");
@@ -287,7 +196,6 @@ class TestTodo {
     try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
       Validator validator = factory.getValidator();
 
-      todo.setUserId(1L);
       todo.setTodoId(-1L);
       todo.setTodoListId(1L);
       todo.setTitle("title");

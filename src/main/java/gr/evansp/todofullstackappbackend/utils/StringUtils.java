@@ -1,6 +1,5 @@
 package gr.evansp.todofullstackappbackend.utils;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 /**
@@ -9,10 +8,11 @@ import java.util.Random;
 @SuppressWarnings("unused")
 public class StringUtils {
 
+  private static final Random rnd = new Random();
   /**
-   * Random.
+   * Available characters.
    */
-  private static final Random random = new Random();
+  private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".repeat(20);
 
   private StringUtils() {
     // Private NoArgs Constructor
@@ -28,9 +28,13 @@ public class StringUtils {
     if (length <= 0) {
       throw new IllegalArgumentException("Length must be positive");
     }
-    byte[] bytes = new byte[length];
 
-    random.nextBytes(bytes);
-    return new String(bytes, StandardCharsets.UTF_8);
+    StringBuilder salt = new StringBuilder();
+
+    while (salt.length() < length) { // length of the random string.
+      int index = rnd.nextInt(0, length);
+      salt.append(CHARACTERS.charAt(index));
+    }
+    return salt.toString();
   }
 }
