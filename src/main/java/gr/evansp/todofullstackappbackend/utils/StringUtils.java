@@ -33,12 +33,12 @@ public class StringUtils {
       throw new IllegalArgumentException("Length must be less than 512");
     }
 
-    StringBuilder salt = new StringBuilder();
+    StringBuilder builder = new StringBuilder();
 
-    while (salt.length() < length) { // length of the random string.
+    while (builder.length() < length) { // length of the random string.
       int index = rnd.nextInt(0, length);
-      salt.append(CHARACTERS.charAt(index));
+      builder.append(CHARACTERS.charAt(index));
     }
-    return salt.toString();
+    return builder.toString();
   }
 }
