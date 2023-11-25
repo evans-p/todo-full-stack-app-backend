@@ -1,5 +1,10 @@
 # TODO Full Stack App Backend
 
+## TODOS
+
+1. Add Maven Profiling for integration tests.
+2. Complete App Internationalization.
+
 ## Class Diagram
 
 ```mermaid

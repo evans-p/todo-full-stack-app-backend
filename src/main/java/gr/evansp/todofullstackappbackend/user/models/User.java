@@ -1,6 +1,5 @@
 package gr.evansp.todofullstackappbackend.user.models;
 
-import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
 import gr.evansp.todofullstackappbackend.todo.models.TodoList;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -23,24 +22,24 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "USER_ID", nullable = false)
-  @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
+  @Min(value = 1L, message = "{id.min}")
   @EqualsAndHashCode.Include
   private Long userId;
 
   @Column(name = "EMAIL", unique = true, nullable = false)
-  @NotEmpty(message = ValidationConstants.EMAIL_EMPTY)
-  @Email(message = ValidationConstants.EMAIL_VALID)
+  @NotEmpty(message = "{email.empty}")
+  @Email(message = "{email.invalid}")
   @lombok.NonNull
   private String email;
 
-  @NotNull(message = ValidationConstants.PASSWORD_NULL)
-  @Size(min = 8, message = ValidationConstants.PASSWORD_SHORT)
+  @NotNull(message = "{password.empty}")
+  @Size(min = 8, message = "{password.too.short}")
   @Column(name = "PASSWORD", nullable = false)
   @lombok.NonNull
   private String password;
 
   @Column(name = "CREATED", nullable = false)
-  @NotNull(message = ValidationConstants.CREATE_DATE_NULL)
+  @NotNull(message = "{create.date.null}")
   private LocalDateTime created = LocalDateTime.now();
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -1,6 +1,5 @@
 package gr.evansp.todofullstackappbackend.todo.models;
 
-import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -26,26 +25,26 @@ public class TodoList {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "LIST_ID", nullable = false)
   @EqualsAndHashCode.Include
-  @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
+  @Min(value = 1L, message = "{id.min}")
   private Long todoListId;
 
   @Column(name = "USER_ID", nullable = false)
-  @NotNull(message = ValidationConstants.ID_NULL)
-  @Min(value = 1L, message = ValidationConstants.ID_GREATER_THAN_ZERO)
+  @NotNull(message = "{id.null}")
+  @Min(value = 1L, message = "{id.min}")
   @lombok.NonNull
   private Long userId;
 
   @Column(name = "TITLE", nullable = false)
-  @NotEmpty(message = ValidationConstants.TITLE_EMPTY)
+  @NotEmpty(message = "{title.empty}")
   @lombok.NonNull
   private String title;
 
   @Column(name = "CREATED", nullable = false)
-  @NotNull(message = ValidationConstants.CREATE_DATE_NULL)
+  @NotNull(message = "{create.date.null}")
   private LocalDateTime created = LocalDateTime.now();
 
   @Column(name = "LAST_MODIFIED", nullable = false)
-  @NotNull(message = ValidationConstants.LAST_MODIFIED_DATE_NULL)
+  @NotNull(message = "{last.modified.date.null}")
   private LocalDateTime lastModified = LocalDateTime.now();
 
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

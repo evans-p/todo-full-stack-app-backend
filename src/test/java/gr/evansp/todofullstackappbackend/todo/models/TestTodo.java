@@ -1,6 +1,6 @@
 package gr.evansp.todofullstackappbackend.todo.models;
 
-import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
+import gr.evansp.todofullstackappbackend.base.BaseTest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit tests for Todo1.
  */
-class TestTodo {
+class TestTodo extends BaseTest {
   /**
    * Subject under test.
    */
@@ -127,7 +127,7 @@ class TestTodo {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_NULL));
+          .contains(validationMessages.getString("id.null")));
     }
   }
 
@@ -147,7 +147,7 @@ class TestTodo {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
+          .contains(validationMessages.getString("id.min")));
     }
   }
 
@@ -167,7 +167,7 @@ class TestTodo {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
+          .contains(validationMessages.getString("id.min")));
     }
   }
 
@@ -187,7 +187,7 @@ class TestTodo {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
+          .contains(validationMessages.getString("id.min")));
     }
   }
 
@@ -207,7 +207,7 @@ class TestTodo {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
+          .contains(validationMessages.getString("id.min")));
     }
   }
 }

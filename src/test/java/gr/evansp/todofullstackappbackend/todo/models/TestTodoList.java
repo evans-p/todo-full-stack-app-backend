@@ -1,7 +1,7 @@
 package gr.evansp.todofullstackappbackend.todo.models;
 
+import gr.evansp.todofullstackappbackend.base.BaseTest;
 import gr.evansp.todofullstackappbackend.common.constants.StringConstants;
-import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit tests for {@link TodoList}.
  */
-class TestTodoList {
+class TestTodoList extends BaseTest {
 
   /**
    * Subject under test.
@@ -132,7 +132,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_NULL));
+          .contains(validationMessages.getString("id.null")));
     }
   }
 
@@ -151,7 +151,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
+          .contains(validationMessages.getString("id.min")));
     }
   }
 
@@ -170,7 +170,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
+          .contains(validationMessages.getString("id.min")));
     }
   }
 
@@ -189,7 +189,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
+          .contains(validationMessages.getString("id.min")));
     }
   }
 
@@ -208,7 +208,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.ID_GREATER_THAN_ZERO));
+          .contains(validationMessages.getString("id.min")));
     }
   }
 
@@ -226,7 +226,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.TITLE_EMPTY));
+          .contains(validationMessages.getString("title.empty")));
     }
   }
 
@@ -245,7 +245,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.TITLE_EMPTY));
+          .contains(validationMessages.getString("title.empty")));
     }
   }
 
@@ -266,7 +266,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.CREATE_DATE_NULL));
+          .contains(validationMessages.getString("create.date.null")));
     }
   }
 
@@ -286,7 +286,7 @@ class TestTodoList {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.CREATE_DATE_NULL));
+          .contains(validationMessages.getString("create.date.null")));
     }
   }
 

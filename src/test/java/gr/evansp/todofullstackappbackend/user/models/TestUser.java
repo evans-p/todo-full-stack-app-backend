@@ -1,7 +1,7 @@
 package gr.evansp.todofullstackappbackend.user.models;
 
+import gr.evansp.todofullstackappbackend.base.BaseTest;
 import gr.evansp.todofullstackappbackend.common.constants.StringConstants;
-import gr.evansp.todofullstackappbackend.common.constants.ValidationConstants;
 import gr.evansp.todofullstackappbackend.todo.models.TodoList;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit tests for {@link User}.
  */
-class TestUser {
+class TestUser extends BaseTest {
 
   User user;
 
@@ -81,7 +81,7 @@ class TestUser {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.EMAIL_EMPTY));
+          .contains(validationMessages.getString("email.empty")));
     }
   }
 
@@ -99,7 +99,7 @@ class TestUser {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.EMAIL_EMPTY));
+          .contains(validationMessages.getString("email.empty")));
     }
   }
 
@@ -118,7 +118,7 @@ class TestUser {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.EMAIL_VALID));
+          .contains(validationMessages.getString("email.invalid")));
     }
   }
 
@@ -150,7 +150,7 @@ class TestUser {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.PASSWORD_NULL));
+          .contains(validationMessages.getString("password.empty")));
     }
   }
 
@@ -169,7 +169,7 @@ class TestUser {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.PASSWORD_SHORT));
+          .contains(validationMessages.getString("password.too.short")));
     }
   }
 
@@ -188,7 +188,7 @@ class TestUser {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(ValidationConstants.PASSWORD_SHORT));
+          .contains(validationMessages.getString("password.too.short")));
     }
   }
 
