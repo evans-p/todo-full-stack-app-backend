@@ -2,7 +2,6 @@ package gr.evansp.todofullstackappbackend.services.todos;
 
 import gr.evansp.todofullstackappbackend.base.BaseTest;
 import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
-import gr.evansp.todofullstackappbackend.exceptions.messages.ExceptionMessages;
 import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.models.users.User;
@@ -123,7 +122,7 @@ class TestTodoService extends BaseTest {
   @Test
   void testFind_notFound() {
     NotFoundException exception = assertThrows(NotFoundException.class, () -> service.find(-1L));
-    assertEquals(ExceptionMessages.TODO_NOT_FOUND, exception.getMessage());
+    assertEquals(NotFoundException.TODO_NOT_FOUND, exception.getMessage());
   }
 
   /**

@@ -1,7 +1,6 @@
 package gr.evansp.todofullstackappbackend.services.todos;
 
 import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
-import gr.evansp.todofullstackappbackend.exceptions.messages.ExceptionMessages;
 import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import gr.evansp.todofullstackappbackend.repositories.todos.TodoRepository;
 import jakarta.transaction.Transactional;
@@ -26,7 +25,7 @@ public class TodoServiceImpl implements TodoService {
   @Transactional
   public Todo find(Long id) {
     return todoRepository.findById(id).orElseThrow(
-        () -> new NotFoundException(ExceptionMessages.TODO_NOT_FOUND, null)
+        () -> new NotFoundException(NotFoundException.TODO_NOT_FOUND, null)
     );
   }
 

@@ -1,7 +1,6 @@
 package gr.evansp.todofullstackappbackend.services.todos;
 
 import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
-import gr.evansp.todofullstackappbackend.exceptions.messages.ExceptionMessages;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.repositories.todos.TodoListRepository;
 import jakarta.transaction.Transactional;
@@ -28,7 +27,7 @@ public class TodoListServiceImpl implements TodoListService {
   @Transactional
   public TodoList find(Long id) {
     return todoListRepository.findById(id).orElseThrow(
-        () -> new NotFoundException(ExceptionMessages.LIST_NOT_FOUND, null));
+        () -> new NotFoundException(NotFoundException.LIST_NOT_FOUND, null));
   }
 
   @Override
