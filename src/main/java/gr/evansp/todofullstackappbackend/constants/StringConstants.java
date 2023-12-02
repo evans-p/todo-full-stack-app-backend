@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.common.constants;
+package gr.evansp.todofullstackappbackend.constants;
 
 @SuppressWarnings("nls")
 public class StringConstants {

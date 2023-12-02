@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.common.exceptions.messages;
+package gr.evansp.todofullstackappbackend.exceptions.messages;
 
 /**
  * Class containing all message Ids for exceptions thrown by the app.

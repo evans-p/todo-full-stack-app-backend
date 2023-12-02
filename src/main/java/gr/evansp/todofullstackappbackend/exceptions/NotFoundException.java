@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.common.exceptions;
+package gr.evansp.todofullstackappbackend.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

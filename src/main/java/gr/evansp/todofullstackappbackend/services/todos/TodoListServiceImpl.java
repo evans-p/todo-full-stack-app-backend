@@ -1,7 +1,7 @@
 package gr.evansp.todofullstackappbackend.services.todos;
 
-import gr.evansp.todofullstackappbackend.common.exceptions.NotFoundException;
-import gr.evansp.todofullstackappbackend.common.exceptions.messages.ExceptionMessages;
+import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
+import gr.evansp.todofullstackappbackend.exceptions.messages.ExceptionMessages;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.repositories.todos.TodoListRepository;
 import jakarta.transaction.Transactional;
