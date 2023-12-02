@@ -1,6 +1,6 @@
-package gr.evansp.todofullstackappbackend.todo.repositories;
+package gr.evansp.todofullstackappbackend.repositories.todos;
 
-import gr.evansp.todofullstackappbackend.todo.models.TodoList;
+import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package gr.evansp.todofullstackappbackend.user.repositories;
+package gr.evansp.todofullstackappbackend.repositories.users;
 
-import gr.evansp.todofullstackappbackend.user.models.User;
+import gr.evansp.todofullstackappbackend.models.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

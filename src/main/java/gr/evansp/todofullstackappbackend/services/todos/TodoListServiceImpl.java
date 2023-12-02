@@ -1,7 +1,8 @@
-package gr.evansp.todofullstackappbackend.todo.services;
+package gr.evansp.todofullstackappbackend.services.todos;
 
-import gr.evansp.todofullstackappbackend.todo.models.TodoList;
-import gr.evansp.todofullstackappbackend.todo.repositories.TodoListRepository;
+import gr.evansp.todofullstackappbackend.common.exceptions.ListNotFoundException;
+import gr.evansp.todofullstackappbackend.models.todos.TodoList;
+import gr.evansp.todofullstackappbackend.repositories.todos.TodoListRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,26 +23,26 @@ public class TodoListServiceImpl implements TodoListService {
 
   @Override
   @Transactional
-  public TodoList find(Long id) {
+  public TodoList find(Long id) throws ListNotFoundException {
     //TODO Add custom exception
-    return todoListRepository.findById(id).orElseThrow(RuntimeException::new);
+    return todoListRepository.findById(id).orElseThrow(() -> new ListNotFoundException(""));
   }
 
   @Override
   @Transactional
   public TodoList store(TodoList todoList) {
-    return null;
+    return todoListRepository.save(todoList);
   }
 
   @Override
   @Transactional
   public TodoList update(TodoList todoList) {
-    return null;
+    return todoListRepository.save(todoList);
   }
 
   @Override
   @Transactional
   public void delete(TodoList todoList) {
-    //EMPTY
+    todoListRepository.delete(todoList);
   }
 }

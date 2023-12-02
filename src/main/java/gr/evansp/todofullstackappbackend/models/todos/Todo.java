@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.todo.models;
+package gr.evansp.todofullstackappbackend.models.todos;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;

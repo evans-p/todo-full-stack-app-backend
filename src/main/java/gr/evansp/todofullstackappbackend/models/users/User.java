@@ -1,6 +1,6 @@
-package gr.evansp.todofullstackappbackend.user.models;
+package gr.evansp.todofullstackappbackend.models.users;
 
-import gr.evansp.todofullstackappbackend.todo.models.TodoList;
+import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;

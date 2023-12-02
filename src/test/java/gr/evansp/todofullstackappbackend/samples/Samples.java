@@ -1,8 +1,8 @@
 package gr.evansp.todofullstackappbackend.samples;
 
-import gr.evansp.todofullstackappbackend.todo.models.Todo;
-import gr.evansp.todofullstackappbackend.todo.models.TodoList;
-import gr.evansp.todofullstackappbackend.user.models.User;
+import gr.evansp.todofullstackappbackend.models.todos.Todo;
+import gr.evansp.todofullstackappbackend.models.todos.TodoList;
+import gr.evansp.todofullstackappbackend.models.users.User;
 import gr.evansp.todofullstackappbackend.utils.NumberUtils;
 import gr.evansp.todofullstackappbackend.utils.StringUtils;
 

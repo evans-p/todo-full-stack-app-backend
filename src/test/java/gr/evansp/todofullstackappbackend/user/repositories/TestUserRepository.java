@@ -1,7 +1,8 @@
 package gr.evansp.todofullstackappbackend.user.repositories;
 
+import gr.evansp.todofullstackappbackend.models.users.User;
+import gr.evansp.todofullstackappbackend.repositories.users.UserRepository;
 import gr.evansp.todofullstackappbackend.samples.Samples;
-import gr.evansp.todofullstackappbackend.user.models.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

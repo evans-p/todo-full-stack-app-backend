@@ -2,7 +2,8 @@ package gr.evansp.todofullstackappbackend.user.models;
 
 import gr.evansp.todofullstackappbackend.base.BaseTest;
 import gr.evansp.todofullstackappbackend.common.constants.StringConstants;
-import gr.evansp.todofullstackappbackend.todo.models.TodoList;
+import gr.evansp.todofullstackappbackend.models.todos.TodoList;
+import gr.evansp.todofullstackappbackend.models.users.User;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
