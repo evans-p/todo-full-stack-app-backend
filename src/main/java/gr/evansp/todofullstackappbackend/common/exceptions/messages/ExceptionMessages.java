@@ -1,0 +1,18 @@
+package gr.evansp.todofullstackappbackend.common.exceptions.messages;
+
+/**
+ * Class containing all message Ids for exceptions thrown by the app.
+ */
+public class ExceptionMessages {
+  /**
+   * List not found.
+   */
+  public static final String LIST_NOT_FOUND = "list.not.found";
+
+  /**
+   * Private noArgs constructor.
+   */
+  private ExceptionMessages() {
+    //EMPTY
+  }
+}

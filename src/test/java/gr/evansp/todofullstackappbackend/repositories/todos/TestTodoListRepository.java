@@ -1,9 +1,8 @@
-package gr.evansp.todofullstackappbackend.todo.repositories;
+package gr.evansp.todofullstackappbackend.repositories.todos;
 
 import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.models.users.User;
-import gr.evansp.todofullstackappbackend.repositories.todos.TodoListRepository;
 import gr.evansp.todofullstackappbackend.repositories.users.UserRepository;
 import gr.evansp.todofullstackappbackend.samples.Samples;
 import org.junit.jupiter.api.AfterEach;
@@ -28,10 +27,13 @@ import static org.junit.Assert.assertTrue;
 class TestTodoListRepository {
 
   private final List<TodoList> todoLists = new ArrayList<>();
+
   @Autowired
   TodoListRepository repository;
+
   @Autowired
   UserRepository userRepository;
+
   private User user;
 
   @BeforeEach
@@ -74,5 +76,4 @@ class TestTodoListRepository {
 
     todoLists.add(todoList);
   }
-
 }

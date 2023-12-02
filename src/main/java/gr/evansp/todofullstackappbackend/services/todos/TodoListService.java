@@ -1,6 +1,5 @@
 package gr.evansp.todofullstackappbackend.services.todos;
 
-import gr.evansp.todofullstackappbackend.common.exceptions.ListNotFoundException;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -8,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 /**
  * Service for CRUD operations regarding {@link TodoList}.
  */
-@SuppressWarnings("unused")
 public interface TodoListService {
 
   /**
@@ -17,7 +15,7 @@ public interface TodoListService {
    * @param id TodoList ID
    * @return TodoList
    */
-  TodoList find(@NotNull(message = "{id.null}") Long id) throws ListNotFoundException;
+  TodoList find(@NotNull(message = "{id.null}") Long id);
 
   /**
    * Stores a new {@link TodoList} to the DB.
@@ -40,5 +38,5 @@ public interface TodoListService {
    *
    * @param todoList todoList to delete.
    */
-  void delete(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList);
+  void delete(@NotNull(message = "{todo.list.null}") TodoList todoList);
 }
