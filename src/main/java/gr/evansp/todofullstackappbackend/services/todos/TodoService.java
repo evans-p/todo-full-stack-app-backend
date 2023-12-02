@@ -22,7 +22,7 @@ public interface TodoService {
    * @param todo todo1 to store.
    * @return newly stored todoList.
    */
-  Todo store(@NotNull(message = "{todo.list.null}") @Valid Todo todo);
+  Todo store(@NotNull(message = "{todo.null}") @Valid Todo todo);
 
   /**
    * Updates an existing todo1.
@@ -30,12 +30,12 @@ public interface TodoService {
    * @param todo todo1 to store.
    * @return newly stored todoList.
    */
-  Todo update(@NotNull(message = "{todo.list.null}") @Valid Todo todo);
+  Todo update(@NotNull(message = "{todo.null}") @Valid Todo todo);
 
   /**
    * Deletes an existing Todo1.
    *
    * @param todo todo1 to delete.
    */
-  void delete(@NotNull(message = "{todo.list.null}") Todo todo);
+  void delete(@NotNull(message = "{todo.null}") Todo todo);
 }
