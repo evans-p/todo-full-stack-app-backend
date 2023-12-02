@@ -10,6 +10,11 @@ public class ExceptionMessages {
   public static final String LIST_NOT_FOUND = "list.not.found";
 
   /**
+   * List not found.
+   */
+  public static final String TODO_NOT_FOUND = "todo.not.found";
+
+  /**
    * Private noArgs constructor.
    */
   private ExceptionMessages() {
