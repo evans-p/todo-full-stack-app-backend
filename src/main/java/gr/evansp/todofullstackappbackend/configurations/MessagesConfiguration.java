@@ -8,7 +8,6 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 @SuppressWarnings("unused")
 @Configuration
 public class MessagesConfiguration {
-
   @Bean
   MessageSource messageSource() {
     ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
