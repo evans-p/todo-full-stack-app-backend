@@ -10,7 +10,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @SuppressWarnings("unused")
 @RestController
-@RequestMapping("todo-list")
+@RequestMapping("todo-lists")
 public class TodoListController {
 
   private final TodoListService service;
@@ -26,13 +26,15 @@ public class TodoListController {
   }
 
   @PutMapping("/")
-  public TodoList update(@RequestBody TodoList todoList) {
-    return service.update(todoList);
+  public EntityModel<TodoList> update(@RequestBody TodoList todoList) {
+    TodoList list = service.update(todoList);
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel());
   }
 
   @PostMapping("/")
-  public TodoList create(@RequestBody TodoList todoList) {
-    return service.store(todoList);
+  public EntityModel<TodoList> create(@RequestBody TodoList todoList) {
+    TodoList list = service.store(todoList);
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel());
   }
 
   @DeleteMapping("/")
