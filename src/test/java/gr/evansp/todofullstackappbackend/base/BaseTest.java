@@ -8,5 +8,5 @@ import java.util.ResourceBundle;
  */
 public abstract class BaseTest {
   public static ResourceBundle validationMessages =
-      ResourceBundle.getBundle("ValidationMessages", new Locale("el", "EL"));
+      ResourceBundle.getBundle("ValidationMessages", Locale.getDefault());
 }

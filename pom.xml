@@ -17,6 +17,7 @@
     <properties>
         <java.version>17</java.version>
         <revision>0.0.1-SNAPSHOT</revision>
+        <argLine>-Duser.language=el -Duser.country=GR</argLine>
     </properties>
     <dependencies>
         <dependency>
