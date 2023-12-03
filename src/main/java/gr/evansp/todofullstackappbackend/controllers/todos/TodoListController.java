@@ -25,18 +25,18 @@ public class TodoListController {
     return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(id)).withSelfRel());
   }
 
-  @PutMapping("/")
-  public EntityModel<TodoList> update(@RequestBody TodoList todoList) {
-    TodoList list = service.update(todoList);
-    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel());
-  }
-
   @PostMapping("/")
   public EntityModel<TodoList> create(@RequestBody TodoList todoList) {
     TodoList list = service.store(todoList);
     return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel());
   }
 
+  @PutMapping("/")
+  public EntityModel<TodoList> update(@RequestBody TodoList todoList) {
+    TodoList list = service.update(todoList);
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel());
+  }
+  
   @DeleteMapping("/")
   public void delete(@RequestBody TodoList todoList) {
     service.delete(todoList);
