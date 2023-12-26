@@ -4,11 +4,10 @@
 
 1. Add Maven Profiling for integration tests.
 2. Complete App Internationalization.
-3. Internationalize Exceptions.
-4. Add Custom Exceptions.
-5. Add Global REST Exception Handler.
-6. Check for potentially problematic behaviour when you call update or delete, and TodoList ID is null.
-7. Integrate Log4j
+3. Check for potentially problematic behaviour when you call update or delete, and TodoList ID is null.
+4. Integrate Log4j.
+5. Intgrate gmail SMTP server.
+6. Add OAUTH2 Login/registration.
 
 ## Class Diagram
 
