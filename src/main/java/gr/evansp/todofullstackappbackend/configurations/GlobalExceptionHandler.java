@@ -1,7 +1,7 @@
 package gr.evansp.todofullstackappbackend.configurations;
 
 import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
-import gr.evansp.todofullstackappbackend.utils.messages.ExceptionMessage;
+import gr.evansp.todofullstackappbackend.exceptions.messages.ExceptionMessage;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;

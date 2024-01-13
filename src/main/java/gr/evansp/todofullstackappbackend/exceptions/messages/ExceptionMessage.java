@@ -1,4 +1,4 @@
-package gr.evansp.todofullstackappbackend.utils.messages;
+package gr.evansp.todofullstackappbackend.exceptions.messages;
 
 import lombok.Getter;
 
