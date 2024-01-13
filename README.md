@@ -5,9 +5,10 @@
 1. Add Maven Profiling for integration tests.
 2. Complete App Internationalization.
 3. Check for potentially problematic behaviour when you call update or delete, and TodoList ID is null.
-4. Integrate Log4j.
-5. Intgrate gmail SMTP server.
-6. Add OAUTH2 Login/registration.
+4. Add check to make sure that the user doing the action(ex. deleting Todo) is the same with the resource owner.
+5. Integrate Log4j.
+6. Intgrate gmail SMTP server.
+7. Add OAUTH2 Login/registration.
 
 ## Class Diagram
 
