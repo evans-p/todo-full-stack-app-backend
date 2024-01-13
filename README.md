@@ -7,8 +7,8 @@
 3. Check for potentially problematic behaviour when you call update or delete, and TodoList ID is null.
 4. Add check to make sure that the user doing the action(ex. deleting Todo) is the same with the resource owner.
 5. Integrate Log4j.
-6. Intgrate gmail SMTP server.
-7. Add OAUTH2 Login/registration.
+6. Integrate gmail SMTP server (Reports on what the user did per week).
+7. Add Authorization?
 
 ## Class Diagram
 

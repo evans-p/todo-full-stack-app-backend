@@ -22,25 +22,25 @@ public class TodoListController {
   }
 
   @GetMapping("/{id}")
-  public EntityModel<TodoList> read(@PathVariable Long id, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
+  public EntityModel<TodoList> read(@PathVariable Long id, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt token) {
     TodoList list = service.find(id);
-    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(id, user)).withSelfRel());
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(id, token)).withSelfRel());
   }
 
   @PostMapping("/")
-  public EntityModel<TodoList> create(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
+  public EntityModel<TodoList> create(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt token) {
     TodoList list = service.store(todoList);
-    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId(), user)).withSelfRel());
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId(), token)).withSelfRel());
   }
 
   @PutMapping("/")
-  public EntityModel<TodoList> update(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
+  public EntityModel<TodoList> update(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt token) {
     TodoList list = service.update(todoList);
-    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId(), user)).withSelfRel());
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId(), token)).withSelfRel());
   }
 
   @DeleteMapping("/")
-  public void delete(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
+  public void delete(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt token) {
     service.delete(todoList);
   }
 }
