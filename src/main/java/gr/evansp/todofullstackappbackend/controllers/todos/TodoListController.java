@@ -24,26 +24,23 @@ public class TodoListController {
   @GetMapping("/{id}")
   public EntityModel<TodoList> read(@PathVariable Long id, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
     TodoList list = service.find(id);
-    System.out.println(user);
     return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(id, user)).withSelfRel());
   }
 
   @PostMapping("/")
-  public EntityModel<TodoList> create(@RequestBody TodoList todoList, @AuthenticationPrincipal Jwt user) {
+  public EntityModel<TodoList> create(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
     TodoList list = service.store(todoList);
-    System.out.println(user);
     return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId(), user)).withSelfRel());
   }
 
   @PutMapping("/")
-  public EntityModel<TodoList> update(@RequestBody TodoList todoList, @AuthenticationPrincipal Jwt user) {
+  public EntityModel<TodoList> update(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
     TodoList list = service.update(todoList);
-    System.out.println(user);
     return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId(), user)).withSelfRel());
   }
 
   @DeleteMapping("/")
-  public void delete(@RequestBody TodoList todoList, @AuthenticationPrincipal Jwt user) {
+  public void delete(@RequestBody TodoList todoList, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
     service.delete(todoList);
   }
 }
