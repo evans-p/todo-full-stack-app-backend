@@ -38,8 +38,8 @@ classDiagram
         -LocalDateTime: lastModified
         -Boolean: favourite
     }
-    User --> TodoList
-    TodoList --> Todo
+    User --> TodoList: One-to-Many
+    TodoList --> Todo: One-to-Many
 ```
 
 ## Authentication Flow
