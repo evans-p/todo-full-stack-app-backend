@@ -14,14 +14,6 @@
 
 ```mermaid
 classDiagram
-    class User {
-        -Long: userId
-        -String: email
-        -String: password
-        -LocalDateTime: created
-        -Set~Todo~: favoriteTodos
-        -Set~TodoList~: todoLists
-    }
     class TodoList {
         -Long: userId
         -Long: todoListId
@@ -39,7 +31,6 @@ classDiagram
         -LocalDateTime: lastModified
         -Boolean: favourite
     }
-    User --> TodoList: One-to-Many
     TodoList --> Todo: One-to-Many
 ```
 
