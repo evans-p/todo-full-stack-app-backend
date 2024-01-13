@@ -9,6 +9,7 @@
 5. Integrate Log4j.
 6. Integrate gmail SMTP server (Reports on what the user did per week).
 7. Add Authorization?
+8. find a way to add integration tests for REST controllers.
 
 ## Class Diagram
 
