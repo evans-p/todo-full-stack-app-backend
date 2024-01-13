@@ -2,8 +2,6 @@ package gr.evansp.todofullstackappbackend.repositories.todos;
 
 import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
-import gr.evansp.todofullstackappbackend.models.users.User;
-import gr.evansp.todofullstackappbackend.repositories.users.UserRepository;
 import gr.evansp.todofullstackappbackend.samples.Samples;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,25 +25,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 class TestTodoRepository {
 
+  private static final Long userId = 1L;
   private final List<Todo> todos = new ArrayList<>();
   @Autowired
   TodoRepository repository;
   @Autowired
   TodoListRepository todoListRepository;
-  @Autowired
-  UserRepository userRepository;
-  private User user;
-
   private TodoList todoList;
 
   @BeforeEach
   public void setup() {
-    if (user == null) {
-      user = userRepository.save(Samples.createSampleUser());
-    }
 
     if (todoList == null) {
-      todoList = todoListRepository.save(Samples.createSampleTodoList(user.getUserId()));
+      todoList = todoListRepository.save(Samples.createSampleTodoList(userId));
     }
   }
 
@@ -55,7 +47,6 @@ class TestTodoRepository {
       repository.delete(todo);
     }
     todoListRepository.delete(todoList);
-    userRepository.delete(user);
   }
 
   @Test

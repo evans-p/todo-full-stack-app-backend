@@ -4,9 +4,7 @@ import gr.evansp.todofullstackappbackend.base.BaseTest;
 import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
 import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
-import gr.evansp.todofullstackappbackend.models.users.User;
 import gr.evansp.todofullstackappbackend.repositories.todos.TodoListRepository;
-import gr.evansp.todofullstackappbackend.repositories.users.UserRepository;
 import gr.evansp.todofullstackappbackend.samples.Samples;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.AfterEach;
@@ -29,19 +27,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class TestTodoService extends BaseTest {
 
+  private static final Long userId = 1L;
   private final List<Todo> todos = new ArrayList<>();
-
   @Autowired
   TodoService service;
-
-  @Autowired
-  UserRepository userRepository;
-
   @Autowired
   TodoListRepository todoListRepository;
-
-  private User user;
-
   private TodoList list;
 
   /**
@@ -49,11 +40,8 @@ class TestTodoService extends BaseTest {
    */
   @BeforeEach
   public void setup() {
-    if (user == null) {
-      user = userRepository.save(Samples.createSampleUser());
-    }
     if (list == null) {
-      list = todoListRepository.save(Samples.createSampleTodoList(user.getUserId()));
+      list = todoListRepository.save(Samples.createSampleTodoList(userId));
     }
   }
 
@@ -62,7 +50,6 @@ class TestTodoService extends BaseTest {
    */
   @AfterEach
   public void cleanup() {
-    userRepository.delete(user);
     todoListRepository.delete(list);
 
     for (Todo todo : todos) {

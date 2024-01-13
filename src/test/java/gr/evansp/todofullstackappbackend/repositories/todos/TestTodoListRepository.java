@@ -2,11 +2,8 @@ package gr.evansp.todofullstackappbackend.repositories.todos;
 
 import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
-import gr.evansp.todofullstackappbackend.models.users.User;
-import gr.evansp.todofullstackappbackend.repositories.users.UserRepository;
 import gr.evansp.todofullstackappbackend.samples.Samples;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,34 +23,21 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 class TestTodoListRepository {
 
+  private static final Long userId = 1L;
   private final List<TodoList> todoLists = new ArrayList<>();
-
   @Autowired
   TodoListRepository repository;
-
-  @Autowired
-  UserRepository userRepository;
-
-  private User user;
-
-  @BeforeEach
-  public void setup() {
-    if (user == null) {
-      user = userRepository.save(Samples.createSampleUser());
-    }
-  }
 
   @AfterEach
   public void cleanup() {
     for (TodoList todoList : todoLists) {
       repository.delete(todoList);
     }
-    userRepository.delete(user);
   }
 
   @Test
   void testSaveEmptyList() {
-    TodoList todoList = repository.save(Samples.createSampleTodoList(user.getUserId()));
+    TodoList todoList = repository.save(Samples.createSampleTodoList(userId));
     assertNotNull(todoList);
     assertTrue(todoList.getTodoListId() > 0);
 
@@ -62,7 +46,7 @@ class TestTodoListRepository {
 
   @Test
   void testSaveFullList() {
-    TodoList todoList = Samples.createSampleTodoList(user.getUserId());
+    TodoList todoList = Samples.createSampleTodoList(userId);
     todoList = repository.save(todoList);
 
     Todo todo = Samples.createSampleTodo(todoList.getTodoListId());

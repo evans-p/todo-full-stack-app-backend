@@ -3,12 +3,9 @@ package gr.evansp.todofullstackappbackend.services.todos;
 import gr.evansp.todofullstackappbackend.base.BaseTest;
 import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
-import gr.evansp.todofullstackappbackend.models.users.User;
-import gr.evansp.todofullstackappbackend.repositories.users.UserRepository;
 import gr.evansp.todofullstackappbackend.samples.Samples;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,33 +24,16 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class TestTodoListService extends BaseTest {
 
+  public static final Long userId = 1L;
   private final List<TodoList> todoLists = new ArrayList<>();
-
   @Autowired
   TodoListService service;
-
-  @Autowired
-  UserRepository userRepository;
-
-  private User user;
-
-  /**
-   * Service setup.
-   */
-  @BeforeEach
-  public void setup() {
-    if (user == null) {
-      user = userRepository.save(Samples.createSampleUser());
-    }
-  }
 
   /**
    * Service Cleanup.
    */
   @AfterEach
   public void cleanup() {
-    userRepository.delete(user);
-
     for (TodoList list : todoLists) {
       service.delete(list);
     }
@@ -86,7 +66,7 @@ class TestTodoListService extends BaseTest {
    */
   @Test
   void testStore_ok() {
-    TodoList list = service.store(Samples.createSampleTodoList(user.getUserId()));
+    TodoList list = service.store(Samples.createSampleTodoList(userId));
     assertNotNull(list);
     assertTrue(list.getTodoListId() > 0);
 
@@ -118,7 +98,7 @@ class TestTodoListService extends BaseTest {
    */
   @Test
   void testFind_ok() {
-    TodoList list = service.store(Samples.createSampleTodoList(user.getUserId()));
+    TodoList list = service.store(Samples.createSampleTodoList(userId));
     todoLists.add(list);
 
     assertEquals(list, service.find(list.getTodoListId()));
@@ -152,7 +132,7 @@ class TestTodoListService extends BaseTest {
    */
   @Test
   void testUpdate_ok() {
-    TodoList list = service.store(Samples.createSampleTodoList(user.getUserId()));
+    TodoList list = service.store(Samples.createSampleTodoList(userId));
     todoLists.add(list);
 
     list.setTitle("LALALA");
@@ -175,7 +155,7 @@ class TestTodoListService extends BaseTest {
    */
   @Test
   void testDelete_ok() {
-    TodoList list = service.store(Samples.createSampleTodoList(user.getUserId()));
+    TodoList list = service.store(Samples.createSampleTodoList(userId));
     service.delete(list);
 
     Long id = list.getTodoListId();

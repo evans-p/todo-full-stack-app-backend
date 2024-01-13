@@ -3,6 +3,8 @@ package gr.evansp.todofullstackappbackend.controllers.todos;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.services.todos.TodoListService;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -20,25 +22,28 @@ public class TodoListController {
   }
 
   @GetMapping("/{id}")
-  public EntityModel<TodoList> read(@PathVariable Long id) {
+  public EntityModel<TodoList> read(@PathVariable Long id, @AuthenticationPrincipal(errorOnInvalidType = true) Jwt user) {
     TodoList list = service.find(id);
-    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(id)).withSelfRel());
+    System.out.println(user);
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(id, user)).withSelfRel());
   }
 
   @PostMapping("/")
-  public EntityModel<TodoList> create(@RequestBody TodoList todoList) {
+  public EntityModel<TodoList> create(@RequestBody TodoList todoList, @AuthenticationPrincipal Jwt user) {
     TodoList list = service.store(todoList);
-    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel());
+    System.out.println(user);
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId(), user)).withSelfRel());
   }
 
   @PutMapping("/")
-  public EntityModel<TodoList> update(@RequestBody TodoList todoList) {
+  public EntityModel<TodoList> update(@RequestBody TodoList todoList, @AuthenticationPrincipal Jwt user) {
     TodoList list = service.update(todoList);
-    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel());
+    System.out.println(user);
+    return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId(), user)).withSelfRel());
   }
-  
+
   @DeleteMapping("/")
-  public void delete(@RequestBody TodoList todoList) {
+  public void delete(@RequestBody TodoList todoList, @AuthenticationPrincipal Jwt user) {
     service.delete(todoList);
   }
 }
