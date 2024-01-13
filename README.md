@@ -43,3 +43,20 @@ classDiagram
     TodoList --> Todo
 ```
 
+## Authentication Flow
+
+```mermaid
+sequenceDiagram
+    participant User Agent
+    participant Client Application
+    participant Authorization Server
+    participant Resource Server
+    User Agent ->> Client Application: Requests Resource
+    Client Application ->> Authorization Server: Auth Token Request
+    Authorization Server ->> User Agent: Login Page
+    User Agent ->> Authorization Server: User Login
+    Authorization Server -->> Client Application: Access Token
+    Client Application ->> Resource Server: API Call With Access Token
+    Resource Server -->> Authorization Server: Validate Token
+    Resource Server ->> Client Application: API Response With Resource, If Token Is Valid
+```
