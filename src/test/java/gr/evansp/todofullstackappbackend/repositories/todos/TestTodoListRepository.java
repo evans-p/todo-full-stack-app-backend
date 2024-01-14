@@ -13,8 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Integration test for {@link TodoListRepository}.
@@ -42,6 +41,15 @@ class TestTodoListRepository {
     assertTrue(todoList.getTodoListId() > 0);
 
     todoLists.add(todoList);
+  }
+
+  @Test
+  void testFindByUserId() {
+    TodoList todoList = repository.save(Samples.createSampleTodoList(userId));
+    todoLists.add(todoList);
+
+    List<TodoList> lists = repository.findByUserId(userId);
+    assertEquals(1, lists.size());
   }
 
   @Test
