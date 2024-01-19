@@ -15,7 +15,7 @@ public class NotFoundException extends RuntimeException {
   public static final String LIST_NOT_FOUND = "list.not.found";
 
   /**
-   * List not found.
+   * Todo1 not found.
    */
   public static final String TODO_NOT_FOUND = "todo.not.found";
 
