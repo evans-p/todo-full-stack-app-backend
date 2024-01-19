@@ -4,10 +4,19 @@ import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
+
 /**
  * Service for CRUD operations regarding {@link TodoList}.
  */
 public interface TodoListService {
+
+  /**
+   * Returns all {@link TodoList} of the authenticated User.
+   *
+   * @return List<TodoList>
+   */
+  List<TodoList> getAll();
 
   /**
    * A method to find a {@link TodoList} by its ID (primary key).
