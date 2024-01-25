@@ -6,7 +6,16 @@ import java.util.ResourceBundle;
 /**
  * Base class for tests.
  */
+@SuppressWarnings({"nls", "unused"})
 public abstract class BaseTest {
-  public static ResourceBundle validationMessages =
+  /**
+   * Validation Messages.
+   */
+  public static final ResourceBundle ERROR_MESSAGES =
+      ResourceBundle.getBundle("messages", Locale.getDefault());
+  /**
+   * Error Messages.
+   */
+  public static ResourceBundle VALIDATION_MESSAGES =
       ResourceBundle.getBundle("ValidationMessages", Locale.getDefault());
 }

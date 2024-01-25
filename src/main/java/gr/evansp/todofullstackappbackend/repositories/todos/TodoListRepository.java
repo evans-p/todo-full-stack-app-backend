@@ -17,5 +17,5 @@ public interface TodoListRepository extends JpaRepository<TodoList, Long> {
    * @param userId userId
    * @return List
    */
-  List<TodoList> findByUserId(Long userId);
+  List<TodoList> findByUserId(String userId);
 }

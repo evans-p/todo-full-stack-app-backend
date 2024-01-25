@@ -9,8 +9,11 @@ import gr.evansp.todofullstackappbackend.utils.StringUtils;
  */
 public class Samples {
 
+  /**
+   * Private NoArgConstructor
+   */
   private Samples() {
-    //Private NoArgConstructor
+    //EMPTY
   }
 
   /**
@@ -19,7 +22,7 @@ public class Samples {
    * @param userId userId
    * @return TodoList
    */
-  public static TodoList createSampleTodoList(Long userId) {
+  public static TodoList createSampleTodoList(String userId) {
     return new TodoList(userId, StringUtils.generateRandomString(10));
   }
 

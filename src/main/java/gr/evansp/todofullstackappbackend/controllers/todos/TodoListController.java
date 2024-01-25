@@ -8,7 +8,6 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -37,7 +36,7 @@ public class TodoListController {
         .map(list -> EntityModel.of(list,
             linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel(),
             linkTo(methodOn(TodoListController.class).readAll()).withRel("todoLists")))
-        .collect(Collectors.toList());
+        .toList();
 
     return CollectionModel.of(lists,
         linkTo(methodOn(TodoListController.class).readAll()).withSelfRel());

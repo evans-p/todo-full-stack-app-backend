@@ -19,6 +19,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(schema = "TODO", name = "TBTODOLIST")
+@SuppressWarnings("com.haulmont.jpb.LombokEqualsAndHashCodeInspection")
 public class TodoList {
 
   @Id
@@ -29,10 +30,9 @@ public class TodoList {
   private Long todoListId;
 
   @Column(name = "USER_ID", nullable = false)
-  @NotNull(message = "{id.null}")
-  @Min(value = 1L, message = "{id.min}")
+  @NotEmpty(message = "{id.null}")
   @lombok.NonNull
-  private Long userId;
+  private String userId;
 
   @Column(name = "TITLE", nullable = false)
   @NotEmpty(message = "{title.empty}")

@@ -47,5 +47,5 @@ public interface TodoListService {
    *
    * @param todoList todoList to delete.
    */
-  void delete(@NotNull(message = "{todo.list.null}") TodoList todoList);
+  void delete(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList);
 }

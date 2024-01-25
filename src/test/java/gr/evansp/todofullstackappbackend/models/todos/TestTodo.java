@@ -89,11 +89,9 @@ class TestTodo extends BaseTest {
   @Test
   void testEquals_false() {
     Todo todo1 = new Todo();
-    todo1.setTodoListId(1L);
     todo1.setTodoId(1L);
 
     Todo todo2 = new Todo();
-    todo2.setTodoListId(2L);
     todo2.setTodoId(2L);
 
     assertNotEquals(todo1, todo2);
@@ -102,11 +100,9 @@ class TestTodo extends BaseTest {
   @Test
   void testEquals_true() {
     Todo todo1 = new Todo();
-    todo1.setTodoListId(1L);
     todo1.setTodoId(1L);
 
     Todo todo2 = new Todo();
-    todo2.setTodoListId(1L);
     todo2.setTodoId(1L);
 
     assertEquals(todo1, todo2);
@@ -127,7 +123,7 @@ class TestTodo extends BaseTest {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.null")));
+          .contains(VALIDATION_MESSAGES.getString("id.null")));
     }
   }
 
@@ -147,7 +143,7 @@ class TestTodo extends BaseTest {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.min")));
+          .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 
@@ -167,7 +163,7 @@ class TestTodo extends BaseTest {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.min")));
+          .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 
@@ -187,7 +183,7 @@ class TestTodo extends BaseTest {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.min")));
+          .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 
@@ -207,7 +203,7 @@ class TestTodo extends BaseTest {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.min")));
+          .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 }

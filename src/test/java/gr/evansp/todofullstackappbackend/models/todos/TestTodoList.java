@@ -1,7 +1,6 @@
 package gr.evansp.todofullstackappbackend.models.todos;
 
 import gr.evansp.todofullstackappbackend.base.BaseTest;
-import gr.evansp.todofullstackappbackend.constants.StringConstants;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -36,14 +35,14 @@ class TestTodoList extends BaseTest {
 
   @Test
   void testRequiredArgsConstructor() {
-    TodoList list = new TodoList(1L, "sample list");
+    TodoList list = new TodoList("1", "sample list");
     assertNotNull(list);
   }
 
   @Test
   void testSetUserId() {
-    list.setUserId(1L);
-    assertEquals(1L, list.getUserId());
+    list.setUserId("1");
+    assertEquals("1", list.getUserId());
   }
 
   @Test
@@ -87,20 +86,10 @@ class TestTodoList extends BaseTest {
   @Test
   void testEquals_false() {
     TodoList list1 = new TodoList();
-    list1.setUserId(1L);
     list1.setTodoListId(1L);
 
     TodoList list2 = new TodoList();
-    list2.setUserId(1L);
     list2.setTodoListId(2L);
-
-    assertNotEquals(list1, list2);
-
-    list1.setUserId(1L);
-    list1.setTodoListId(2L);
-
-    list2.setUserId(1L);
-    list2.setTodoListId(1L);
 
     assertNotEquals(list1, list2);
   }
@@ -108,199 +97,168 @@ class TestTodoList extends BaseTest {
   @Test
   void testEquals_true() {
     TodoList list1 = new TodoList();
-    list1.setUserId(1L);
     list1.setTodoListId(1L);
 
     TodoList list2 = new TodoList();
-    list2.setUserId(1L);
     list2.setTodoListId(1L);
 
     assertEquals(list1, list2);
   }
 
   @Test
-  void testValidateUserId_null() {
+  void testValidate_nullListId() {
     try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
       Validator validator = factory.getValidator();
 
-      list.setTodoListId(1L);
-      list.setTitle("title");
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.null")));
-    }
-  }
-
-  @Test
-  void testValidateUserId_zero() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setUserId(0L);
-      list.setTodoListId(1L);
-      list.setTitle("title");
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.min")));
-    }
-  }
-
-  @Test
-  void testValidateUserId_negative() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setUserId(-1L);
-      list.setTodoListId(1L);
-      list.setTitle("title");
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.min")));
-    }
-  }
-
-  @Test
-  void testValidateTodoListId_zero() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setTodoListId(0L);
-      list.setUserId(1L);
-      list.setTitle("title");
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.min")));
-    }
-  }
-
-  @Test
-  void testValidateTodoListId_negative() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setTodoListId(-1L);
-      list.setUserId(1L);
-      list.setTitle("title");
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("id.min")));
-    }
-  }
-
-  @Test
-  void testValidateTitle_null() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setTodoListId(1L);
-      list.setUserId(1L);
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("title.empty")));
-    }
-  }
-
-  @Test
-  void testValidateTitle_empty() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setTodoListId(1L);
-      list.setUserId(1L);
-      list.setTitle(StringConstants.EMPTY);
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("title.empty")));
-    }
-  }
-
-
-  @Test
-  void testValidateCreated_null() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setTodoListId(1L);
-      list.setUserId(1L);
-      list.setTitle("title");
-      list.setCreated(null);
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("create.date.null")));
-    }
-  }
-
-  @Test
-  void testValidateLastModified_null() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setTodoListId(1L);
-      list.setUserId(1L);
-      list.setTitle("title");
-      list.setCreated(null);
-
-      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(validationMessages.getString("create.date.null")));
-    }
-  }
-
-  @Test
-  void testValidate_ok() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      list.setTodoListId(1L);
-      list.setUserId(1L);
-      list.setTitle("title");
+      list = new TodoList("1", "sample list");
 
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(0, violations.size());
+    }
+  }
+
+  @Test
+  void testValidate_zeroListId() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      list = new TodoList("1", "sample list");
+      list.setTodoListId(0L);
+
+      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("id.min")));
+    }
+  }
+
+  @Test
+  void testValidate_negativeListId() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      list = new TodoList("1", "sample list");
+      list.setTodoListId(-1L);
+
+      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("id.min")));
+    }
+  }
+
+  @Test
+  void testValidate_nullUserId() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      list = new TodoList();
+      list.setTitle("sample list");
+
+      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("id.null")));
+    }
+  }
+
+  @Test
+  void testValidate_EmptyUserId() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      list = new TodoList("", "sample list");
+
+
+      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("id.null")));
+    }
+  }
+
+  @Test
+  void testValidate_nullTitle() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      list = new TodoList();
+      list.setUserId("sample list");
+
+      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("title.empty")));
+    }
+  }
+
+
+  @Test
+  void testValidate_emptyTitle() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      list = new TodoList("id", "");
+
+      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("title.empty")));
+    }
+  }
+
+  @Test
+  void testValidate_nullCreated() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      list = new TodoList("id", "sample list");
+      list.setCreated(null);
+
+      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("create.date.null")));
+    }
+  }
+
+
+  @Test
+  void testValidate_nullLastModified() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      list = new TodoList("id", "sample list");
+      list.setLastModified(null);
+
+      Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("last.modified.date.null")));
     }
   }
 }

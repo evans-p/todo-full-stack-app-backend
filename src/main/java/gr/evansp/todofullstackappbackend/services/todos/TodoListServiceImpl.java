@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Implementation of {@link TodoListService}.
@@ -38,7 +39,7 @@ public class TodoListServiceImpl implements TodoListService {
       throw new UnauthorizedException(UnauthorizedException.UNAUTHORIZED, null);
     }
 
-    return todoListRepository.findByUserId(Long.parseLong(authentication.getName()));
+    return todoListRepository.findByUserId(authentication.getName());
   }
 
   @Override
@@ -77,13 +78,13 @@ public class TodoListServiceImpl implements TodoListService {
     todoListRepository.delete(todoList);
   }
 
-  private void checkOwnership(Long id) {
+  private void checkOwnership(String id) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     if (authentication == null) {
       throw new UnauthorizedException(UnauthorizedException.UNAUTHORIZED, null);
     }
 
-    if (Long.parseLong(authentication.getName()) != id) {
+    if (!Objects.equals(authentication.getName(), id)) {
       throw new UnauthorizedException(UnauthorizedException.DIFFERENT_OWNER, null);
     }
   }
