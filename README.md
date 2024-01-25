@@ -3,13 +3,10 @@
 ## TODOS
 
 1. Add Maven Profiling for integration tests.
-2. Complete App Internationalization.
-3. Check for potentially problematic behaviour when you call update or delete, and TodoList ID is null.
-4. Add check to make sure that the user doing the action(ex. deleting Todo) is the same with the resource owner.
-5. Integrate Log4j.
-6. Integrate gmail SMTP server (Reports on what the user did per week).
-7. Add Authorization?
-8. find a way to add integration tests for REST controllers.
+2. Integrate Log4j.
+3. Integrate gmail SMTP server (Reports on what the user did per week).
+4. Add Authorization?
+5. find a way to add integration tests for REST controllers.
 
 ## Class Diagram
 
