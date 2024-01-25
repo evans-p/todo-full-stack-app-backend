@@ -5,7 +5,6 @@ import java.util.Random;
 /**
  * Utilities regarding {@link String}.
  */
-@SuppressWarnings("unused")
 public class StringUtils {
 
   private static final Random rnd = new Random();
