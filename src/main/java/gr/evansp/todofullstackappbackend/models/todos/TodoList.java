@@ -30,7 +30,7 @@ public class TodoList {
   private Long todoListId;
 
   @Column(name = "USER_ID", nullable = false)
-  @NotEmpty(message = "{id.null}")
+  @NotEmpty(message = "{user.id.null}")
   @lombok.NonNull
   private String userId;
 

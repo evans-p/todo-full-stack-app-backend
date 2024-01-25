@@ -167,7 +167,7 @@ class TestTodoList extends BaseTest {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.null")));
+          .contains(VALIDATION_MESSAGES.getString("user.id.null")));
     }
   }
 
@@ -185,7 +185,7 @@ class TestTodoList extends BaseTest {
           .stream()
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.null")));
+          .contains(VALIDATION_MESSAGES.getString("user.id.null")));
     }
   }
 
