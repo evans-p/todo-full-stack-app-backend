@@ -33,7 +33,7 @@ class TestTodo extends BaseTest {
 
   @Test
   void testRequiredArgsConstructor() {
-    Todo todo = new Todo(1L, "title", "body");
+    Todo todo = new Todo(1L, "title", "userId");
     assertNotNull(todo);
   }
 
@@ -82,6 +82,12 @@ class TestTodo extends BaseTest {
   }
 
   @Test
+  void testSetUserId() {
+    todo.setUserId("123");
+    assertEquals("123", todo.getUserId());
+  }
+
+  @Test
   void testToString() {
     assertNotNull(todo.toString());
   }
@@ -115,7 +121,7 @@ class TestTodo extends BaseTest {
 
       todo.setTodoId(1L);
       todo.setTitle("title");
-      todo.setBody("Body");
+      todo.setUserId("Body");
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
@@ -135,7 +141,7 @@ class TestTodo extends BaseTest {
       todo.setTodoId(1L);
       todo.setTodoListId(0L);
       todo.setTitle("title");
-      todo.setBody("Body");
+      todo.setUserId("Body");
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
@@ -155,7 +161,7 @@ class TestTodo extends BaseTest {
       todo.setTodoId(1L);
       todo.setTodoListId(-1L);
       todo.setTitle("title");
-      todo.setBody("Body");
+      todo.setUserId("Body");
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
@@ -175,7 +181,7 @@ class TestTodo extends BaseTest {
       todo.setTodoId(0L);
       todo.setTodoListId(1L);
       todo.setTitle("title");
-      todo.setBody("Body");
+      todo.setUserId("UserId");
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
@@ -195,7 +201,7 @@ class TestTodo extends BaseTest {
       todo.setTodoId(-1L);
       todo.setTodoListId(1L);
       todo.setTitle("title");
-      todo.setBody("Body");
+      todo.setUserId("UserId");
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());

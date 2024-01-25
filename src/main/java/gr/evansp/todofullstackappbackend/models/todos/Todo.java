@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+
 @Setter
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Entity
 @Table(schema = "TODO", name = "TBTODO")
+@SuppressWarnings("com.haulmont.jpb.LombokEqualsAndHashCodeInspection")
 public class Todo {
 
   @Id
@@ -35,8 +37,12 @@ public class Todo {
   @lombok.NonNull
   private String title;
 
-  @Column(name = "BODY")
+  @Column(name = "USER_ID", nullable = false)
+  @NotEmpty(message = "{user.id.null}")
   @lombok.NonNull
+  private String userId;
+
+  @Column(name = "BODY")
   private String body;
 
   @Column(name = "CREATED", nullable = false)
