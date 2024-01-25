@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(new ExceptionMessage(errorMessage), HttpStatus.BAD_REQUEST);
   }
 
-  @ExceptionHandler(LogicException.class)
+  @ExceptionHandler(UnauthorizedException.class)
   public ResponseEntity<ExceptionMessage> handleUnauthorized(UnauthorizedException e, Locale locale) {
     String errorMessage = messageSource.getMessage(e.getMessage(), e.getArgs(), locale);
     return new ResponseEntity<>(new ExceptionMessage(errorMessage), HttpStatus.FORBIDDEN);
