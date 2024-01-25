@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for {@link TodoRepository}
@@ -81,7 +81,7 @@ class TestTodoRepositoryIT extends BaseITTest {
   @Test
   void testFindById_ok() {
     list = listRepository.save(Samples.createSampleTodoList(userId));
-    todo = repository.save(Samples.createSampleTodo(list.getTodoListId()));
+    todo = repository.save(Samples.createSampleTodo(list.getTodoListId(), userId));
 
     Optional<Todo> result = repository.findById(todo.getTodoId());
     assertTrue(result.isPresent());
@@ -93,7 +93,7 @@ class TestTodoRepositoryIT extends BaseITTest {
   @Test
   void testSave_ok() {
     list = listRepository.save(Samples.createSampleTodoList(userId));
-    todo = repository.save(Samples.createSampleTodo(list.getTodoListId()));
+    todo = repository.save(Samples.createSampleTodo(list.getTodoListId(), userId));
 
     Optional<Todo> result = repository.findById(todo.getTodoId());
     assertTrue(result.isPresent());
@@ -105,9 +105,21 @@ class TestTodoRepositoryIT extends BaseITTest {
   @Test
   void testDelete_ok() {
     list = listRepository.save(Samples.createSampleTodoList(userId));
-    todo = repository.save(Samples.createSampleTodo(list.getTodoListId()));
+    todo = repository.save(Samples.createSampleTodo(list.getTodoListId(), userId));
 
     repository.delete(todo);
     assertTrue(repository.findById(todo.getTodoId()).isEmpty());
+  }
+
+  /**
+   * test for {@link TodoRepository#findByUserId(String)}.
+   */
+  @Test
+  void testFindByUserId_ok() {
+    list = listRepository.save(Samples.createSampleTodoList(userId));
+    todo = repository.save(Samples.createSampleTodo(list.getTodoListId(), userId));
+
+    List<Todo> result = repository.findByUserId(userId);
+    assertEquals(1, result.size());
   }
 }

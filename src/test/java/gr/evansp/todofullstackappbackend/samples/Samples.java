@@ -32,8 +32,8 @@ public class Samples {
    * @param listId listId
    * @return Todo1.
    */
-  public static Todo createSampleTodo(Long listId) {
+  public static Todo createSampleTodo(Long listId, String userId) {
     return new Todo(listId, StringUtils.generateRandomString(10),
-        StringUtils.generateRandomString(200));
+        userId);
   }
 }
