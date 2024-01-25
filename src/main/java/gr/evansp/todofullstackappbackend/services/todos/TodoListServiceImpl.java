@@ -53,7 +53,7 @@ public class TodoListServiceImpl implements TodoListService {
   @Transactional
   public TodoList store(TodoList todoList) {
     if (todoList.getTodoListId() != null) {
-      throw new LogicException(LogicException.ALREADY_EXISTS, null);
+      throw new LogicException(LogicException.ALREADY_EXISTS, new Object[]{todoList.getTitle()});
     }
     checkOwnership(todoList.getUserId());
     return todoListRepository.save(todoList);
@@ -64,7 +64,7 @@ public class TodoListServiceImpl implements TodoListService {
   public TodoList update(TodoList todoList) {
 
     if (todoList.getTodoListId() == null) {
-      throw new LogicException(LogicException.DOES_NOT_EXIST, null);
+      throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[]{todoList.getTitle()});
     }
     checkOwnership(todoList.getUserId());
 
@@ -85,7 +85,7 @@ public class TodoListServiceImpl implements TodoListService {
     }
 
     if (!Objects.equals(authentication.getName(), id)) {
-      throw new UnauthorizedException(UnauthorizedException.DIFFERENT_OWNER, null);
+      throw new UnauthorizedException(UnauthorizedException.UNAUTHORIZED, null);
     }
   }
 }

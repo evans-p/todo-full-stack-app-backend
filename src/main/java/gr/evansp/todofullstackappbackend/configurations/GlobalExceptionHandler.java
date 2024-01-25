@@ -1,6 +1,8 @@
 package gr.evansp.todofullstackappbackend.configurations;
 
+import gr.evansp.todofullstackappbackend.exceptions.LogicException;
 import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
+import gr.evansp.todofullstackappbackend.exceptions.UnauthorizedException;
 import gr.evansp.todofullstackappbackend.exceptions.messages.ExceptionMessage;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -42,6 +44,19 @@ public class GlobalExceptionHandler {
     return new ResponseEntity<>(new ExceptionMessage(errorMessage), HttpStatus.NOT_FOUND);
   }
 
+  @ExceptionHandler(LogicException.class)
+  public ResponseEntity<ExceptionMessage> handleLogic(LogicException e, Locale locale) {
+    String errorMessage = messageSource.getMessage(e.getMessage(), e.getArgs(), locale);
+    return new ResponseEntity<>(new ExceptionMessage(errorMessage), HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(LogicException.class)
+  public ResponseEntity<ExceptionMessage> handleUnauthorized(UnauthorizedException e, Locale locale) {
+    String errorMessage = messageSource.getMessage(e.getMessage(), e.getArgs(), locale);
+    return new ResponseEntity<>(new ExceptionMessage(errorMessage), HttpStatus.FORBIDDEN);
+  }
+
+
   @ExceptionHandler(ConstraintViolationException.class)
   public ResponseEntity<ExceptionMessage> handleInvalid(ConstraintViolationException e, Locale locale) {
     Map<String, String> messages = e.getConstraintViolations()
@@ -50,6 +65,6 @@ public class GlobalExceptionHandler {
           List<String> paths = Arrays.asList(c.getPropertyPath().toString().split("\\."));
           return paths.get(paths.size() - 1);
         }, ConstraintViolation::getMessage));
-    return new ResponseEntity<>(new ExceptionMessage(messages), HttpStatus.NOT_FOUND);
+    return new ResponseEntity<>(new ExceptionMessage(messages), HttpStatus.UNPROCESSABLE_ENTITY);
   }
 }
