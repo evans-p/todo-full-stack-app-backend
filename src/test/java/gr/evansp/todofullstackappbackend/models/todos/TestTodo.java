@@ -1,6 +1,7 @@
 package gr.evansp.todofullstackappbackend.models.todos;
 
 import gr.evansp.todofullstackappbackend.base.BaseTest;
+import gr.evansp.todofullstackappbackend.constants.StringConstants;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -170,6 +171,49 @@ class TestTodo extends BaseTest {
           .map(ConstraintViolation::getMessage)
           .collect(Collectors.toSet())
           .contains(VALIDATION_MESSAGES.getString("id.min")));
+    }
+  }
+
+
+  @Test
+  void testValidateUserId_null() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      todo = new Todo();
+
+      todo.setTodoListId(1L);
+      todo.setTitle("123");
+
+
+      Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("user.id.null")));
+    }
+  }
+
+
+  @Test
+  void testValidateUserId_empty() {
+    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+      Validator validator = factory.getValidator();
+
+      todo.setTodoId(1L);
+      todo.setTodoListId(1L);
+      todo.setTitle("title");
+      todo.setUserId(StringConstants.EMPTY);
+
+      Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
+      assertEquals(1, violations.size());
+      assertTrue(violations
+          .stream()
+          .map(ConstraintViolation::getMessage)
+          .collect(Collectors.toSet())
+          .contains(VALIDATION_MESSAGES.getString("user.id.null")));
     }
   }
 
