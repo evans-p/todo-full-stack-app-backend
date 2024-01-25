@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Implementation of {@link TodoListService}.
@@ -24,11 +23,20 @@ import java.util.Objects;
 @Validated
 public class TodoListServiceImpl implements TodoListService {
 
+  /**
+   * {@link TodoListRepository}
+   */
   TodoListRepository todoListRepository;
 
+  /**
+   * {@link VerifyOwnershipService}
+   */
+  VerifyOwnershipService ownershipService;
+
   @Autowired
-  public TodoListServiceImpl(TodoListRepository todoListRepository) {
+  public TodoListServiceImpl(TodoListRepository todoListRepository, VerifyOwnershipService ownershipService) {
     this.todoListRepository = todoListRepository;
+    this.ownershipService = ownershipService;
   }
 
   @Override
@@ -47,7 +55,7 @@ public class TodoListServiceImpl implements TodoListService {
   public TodoList find(Long id) {
     TodoList list = todoListRepository.findById(id).orElseThrow(
         () -> new NotFoundException(NotFoundException.LIST_NOT_FOUND, null));
-    checkOwnership(list.getUserId());
+    ownershipService.checkOwnership(list.getUserId());
     return list;
   }
 
@@ -57,7 +65,7 @@ public class TodoListServiceImpl implements TodoListService {
     if (todoList.getTodoListId() != null) {
       throw new LogicException(LogicException.ALREADY_EXISTS, new Object[]{todoList.getTitle()});
     }
-    checkOwnership(todoList.getUserId());
+    ownershipService.checkOwnership(todoList.getUserId());
     return todoListRepository.save(todoList);
   }
 
@@ -67,8 +75,8 @@ public class TodoListServiceImpl implements TodoListService {
     if (todoList.getTodoListId() == null) {
       throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[]{todoList.getTitle()});
     }
-    checkOwnership(find(todoList.getTodoListId()).getUserId());
-    checkOwnership(todoList.getUserId());
+    ownershipService.checkOwnership(find(todoList.getTodoListId()).getUserId());
+    ownershipService.checkOwnership(todoList.getUserId());
 
     todoList.setLastModified(LocalDateTime.now());
     return todoListRepository.save(todoList);
@@ -77,15 +85,7 @@ public class TodoListServiceImpl implements TodoListService {
   @Override
   @Transactional
   public void delete(TodoList todoList) {
-    checkOwnership(find(todoList.getTodoListId()).getUserId());
+    ownershipService.checkOwnership(find(todoList.getTodoListId()).getUserId());
     todoListRepository.delete(todoList);
-  }
-
-  private void checkOwnership(String id) {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-    if (authentication == null || !Objects.equals(authentication.getName(), id)) {
-      throw new UnauthorizedException(UnauthorizedException.UNAUTHORIZED, null);
-    }
   }
 }
