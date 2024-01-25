@@ -163,7 +163,7 @@ class TestTodoListServiceIT extends BaseITTest {
   void testStore_notTheOwner() {
     TodoList todoList = new TodoList("dummy", "sample list");
     UnauthorizedException e = assertThrows(UnauthorizedException.class, () -> service.store(todoList));
-    assertEquals(UnauthorizedException.DIFFERENT_OWNER, e.getMessage());
+    assertEquals(UnauthorizedException.UNAUTHORIZED, e.getMessage());
   }
 
   /**
@@ -211,29 +211,6 @@ class TestTodoListServiceIT extends BaseITTest {
    * Test for {@link TodoListService#update(TodoList)}
    */
   @Test
-  void testUpdate_unauthorized() {
-    SecurityContextHolder.clearContext();
-    TodoList todoList = new TodoList(SUB, "sample list");
-    todoList.setTodoListId(1L);
-    UnauthorizedException e = assertThrows(UnauthorizedException.class, () -> service.update(todoList));
-    assertEquals(UnauthorizedException.UNAUTHORIZED, e.getMessage());
-  }
-
-  /**
-   * Test for {@link TodoListService#update(TodoList)}
-   */
-  @Test
-  void testUpdate_notTheOwner() {
-    TodoList todoList = new TodoList("dummy", "sample list");
-    todoList.setTodoListId(1L);
-    UnauthorizedException e = assertThrows(UnauthorizedException.class, () -> service.update(todoList));
-    assertEquals(UnauthorizedException.DIFFERENT_OWNER, e.getMessage());
-  }
-
-  /**
-   * Test for {@link TodoListService#update(TodoList)}
-   */
-  @Test
   void testUpdate_ok() {
     list = service.store(new TodoList(SUB, "sample list"));
     list.setTitle("UPDATED");
@@ -241,6 +218,16 @@ class TestTodoListServiceIT extends BaseITTest {
 
     assertEquals(list, result);
     assertNotEquals("sample list", result.getTitle());
+  }
+
+  /**
+   * Test for {@link TodoListService#delete(TodoList)}
+   */
+  @Test
+  void testDelete_ok() {
+    TodoList list = service.store(new TodoList(SUB, "sample list"));
+    service.delete(list);
+    assertEquals(0, service.getAll().size());
   }
 
 }

@@ -45,8 +45,10 @@ public class TodoListServiceImpl implements TodoListService {
   @Override
   @Transactional
   public TodoList find(Long id) {
-    return todoListRepository.findById(id).orElseThrow(
+    TodoList list = todoListRepository.findById(id).orElseThrow(
         () -> new NotFoundException(NotFoundException.LIST_NOT_FOUND, null));
+    checkOwnership(list.getUserId());
+    return list;
   }
 
   @Override
@@ -62,10 +64,10 @@ public class TodoListServiceImpl implements TodoListService {
   @Override
   @Transactional
   public TodoList update(TodoList todoList) {
-
     if (todoList.getTodoListId() == null) {
       throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[]{todoList.getTitle()});
     }
+    checkOwnership(find(todoList.getTodoListId()).getUserId());
     checkOwnership(todoList.getUserId());
 
     todoList.setLastModified(LocalDateTime.now());
@@ -75,16 +77,14 @@ public class TodoListServiceImpl implements TodoListService {
   @Override
   @Transactional
   public void delete(TodoList todoList) {
+    checkOwnership(find(todoList.getTodoListId()).getUserId());
     todoListRepository.delete(todoList);
   }
 
   private void checkOwnership(String id) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    if (authentication == null) {
-      throw new UnauthorizedException(UnauthorizedException.UNAUTHORIZED, null);
-    }
 
-    if (!Objects.equals(authentication.getName(), id)) {
+    if (authentication == null || !Objects.equals(authentication.getName(), id)) {
       throw new UnauthorizedException(UnauthorizedException.UNAUTHORIZED, null);
     }
   }
