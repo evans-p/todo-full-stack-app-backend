@@ -47,5 +47,5 @@ public interface TodoService {
    *
    * @param todo todo1 to delete.
    */
-  void delete(@NotNull(message = "{todo.null}") Todo todo);
+  void delete(@NotNull(message = "{todo.null}") @Valid Todo todo);
 }

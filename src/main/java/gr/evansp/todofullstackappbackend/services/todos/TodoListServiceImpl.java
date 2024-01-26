@@ -6,6 +6,8 @@ import gr.evansp.todofullstackappbackend.exceptions.UnauthorizedException;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.repositories.todos.TodoListRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -52,7 +54,7 @@ public class TodoListServiceImpl implements TodoListService {
 
   @Override
   @Transactional
-  public TodoList find(Long id) {
+  public TodoList find(@NotNull(message = "{id.null}") Long id) {
     TodoList list = todoListRepository.findById(id).orElseThrow(
         () -> new NotFoundException(NotFoundException.LIST_NOT_FOUND, null));
     ownershipService.checkOwnership(list.getUserId());
@@ -61,7 +63,7 @@ public class TodoListServiceImpl implements TodoListService {
 
   @Override
   @Transactional
-  public TodoList store(TodoList todoList) {
+  public TodoList store(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList) {
     if (todoList.getTodoListId() != null) {
       throw new LogicException(LogicException.ALREADY_EXISTS, new Object[]{todoList.getTitle()});
     }
@@ -71,7 +73,7 @@ public class TodoListServiceImpl implements TodoListService {
 
   @Override
   @Transactional
-  public TodoList update(TodoList todoList) {
+  public TodoList update(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList) {
     if (todoList.getTodoListId() == null) {
       throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[]{todoList.getTitle()});
     }
@@ -84,7 +86,7 @@ public class TodoListServiceImpl implements TodoListService {
 
   @Override
   @Transactional
-  public void delete(TodoList todoList) {
+  public void delete(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList) {
     ownershipService.checkOwnership(find(todoList.getTodoListId()).getUserId());
     todoListRepository.delete(todoList);
   }

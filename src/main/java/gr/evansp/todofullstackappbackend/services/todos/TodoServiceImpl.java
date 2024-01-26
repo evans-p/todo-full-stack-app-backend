@@ -7,6 +7,8 @@ import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.repositories.todos.TodoRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,7 +51,7 @@ public class TodoServiceImpl implements TodoService {
 
   @Override
   @Transactional
-  public Todo find(Long id) {
+  public Todo find(@NotNull(message = "{id.null}") Long id) {
     Todo todo = todoRepository.findById(id).orElseThrow(
         () -> new NotFoundException(NotFoundException.LIST_NOT_FOUND, null));
     ownershipService.checkOwnership(todo.getUserId());
@@ -58,7 +60,7 @@ public class TodoServiceImpl implements TodoService {
 
   @Override
   @Transactional
-  public Todo store(Todo todo) {
+  public Todo store(@NotNull(message = "{todo.null}") @Valid Todo todo) {
     if (todo.getTodoId() != null) {
       throw new LogicException(LogicException.ALREADY_EXISTS, new Object[]{todo.getTitle()});
     }
@@ -71,7 +73,7 @@ public class TodoServiceImpl implements TodoService {
 
   @Override
   @Transactional
-  public Todo update(Todo todo) {
+  public Todo update(@NotNull(message = "{todo.null}") @Valid Todo todo) {
     if (todo.getTodoId() == null) {
       throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[]{todo.getTitle()});
     }
@@ -86,7 +88,7 @@ public class TodoServiceImpl implements TodoService {
 
   @Override
   @Transactional
-  public void delete(Todo todo) {
+  public void delete(@NotNull(message = "{todo.null}") @Valid Todo todo) {
     ownershipService.checkOwnership(find(todo.getTodoId()).getUserId());
     todoRepository.delete(todo);
   }
