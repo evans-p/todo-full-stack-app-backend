@@ -47,7 +47,7 @@ public class TodoList {
   @NotNull(message = "{last.modified.date.null}")
   private LocalDateTime lastModified = LocalDateTime.now();
 
-  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  @JoinColumn(name = "LIST_ID")
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+  @JoinColumn(name = "LIST_ID", insertable = false, updatable = false)
   private Set<Todo> todos = new HashSet<>();
 }
