@@ -45,7 +45,7 @@ public interface TodoListService {
   /**
    * Deletes an existing {@link TodoList}.
    *
-   * @param todoList todoList to delete.
+   * @param id ID of the {@link TodoList} to delete.
    */
-  void delete(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList);
+  void delete(@NotNull(message = "{id.null}") Long id);
 }

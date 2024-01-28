@@ -15,7 +15,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 /**
  * REST controller for {@link TodoList}.
  */
-@SuppressWarnings("unused")
 @RestController
 @RequestMapping("todo-lists")
 public class TodoListController {
@@ -57,8 +56,8 @@ public class TodoListController {
     return EntityModel.of(list, linkTo(methodOn(TodoListController.class).read(list.getTodoListId())).withSelfRel());
   }
 
-  @DeleteMapping("/")
-  public void delete(@RequestBody TodoList todoList) {
-    service.delete(todoList);
+  @DeleteMapping("/{id}")
+  public void delete(@PathVariable Long id) {
+    service.delete(id);
   }
 }

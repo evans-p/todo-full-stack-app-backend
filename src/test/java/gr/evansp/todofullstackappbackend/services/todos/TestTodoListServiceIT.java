@@ -221,12 +221,12 @@ class TestTodoListServiceIT extends BaseITTest {
   }
 
   /**
-   * Test for {@link TodoListService#delete(TodoList)}
+   * Test for {@link TodoListService#delete(Long)}
    */
   @Test
   void testDelete_ok() {
     TodoList list = service.store(new TodoList(SUB, "sample list"));
-    service.delete(list);
+    service.delete(list.getTodoListId());
     assertEquals(0, service.getAll().size());
   }
 

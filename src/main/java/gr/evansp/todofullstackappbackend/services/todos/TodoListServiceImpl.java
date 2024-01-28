@@ -77,17 +77,19 @@ public class TodoListServiceImpl implements TodoListService {
     if (todoList.getTodoListId() == null) {
       throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[]{todoList.getTitle()});
     }
-    ownershipService.checkOwnership(find(todoList.getTodoListId()).getUserId());
+    TodoList retrieved = find(todoList.getTodoListId());
+
     ownershipService.checkOwnership(todoList.getUserId());
 
+    todoList.setCreated(retrieved.getCreated());
     todoList.setLastModified(LocalDateTime.now());
     return todoListRepository.save(todoList);
   }
 
   @Override
   @Transactional
-  public void delete(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList) {
-    ownershipService.checkOwnership(find(todoList.getTodoListId()).getUserId());
-    todoListRepository.delete(todoList);
+  public void delete(@NotNull(message = "{id.null}") Long id) {
+    TodoList list = find(id);
+    todoListRepository.delete(list);
   }
 }

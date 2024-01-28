@@ -6,7 +6,6 @@
 2. Integrate Log4j.
 3. Integrate gmail SMTP server (Reports on what the user did per week).
 4. Add Authorization?
-5. find a way to add integration tests for REST controllers.
 
 ## Class Diagram
 
@@ -14,7 +13,7 @@
 classDiagram
     class TodoList {
         -Long: userId
-        -Long: todoListId
+        -String: todoListId
         -String: title
         -LocalDateTime: created
         -LocalDateTime: lastModified
@@ -23,6 +22,7 @@ classDiagram
     class Todo {
         -Long: todoId
         -Long: todoListId
+        -String: userId
         -String: title
         -String: body
         -LocalDateTime: created
