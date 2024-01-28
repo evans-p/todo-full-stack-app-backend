@@ -88,8 +88,9 @@ public class TodoServiceImpl implements TodoService {
 
   @Override
   @Transactional
-  public void delete(@NotNull(message = "{todo.null}") @Valid Todo todo) {
-    ownershipService.checkOwnership(find(todo.getTodoId()).getUserId());
+  public void delete(@NotNull(message = "{id.null}") Long id) {
+    Todo todo = find(id);
+    ownershipService.checkOwnership(find(id).getUserId());
     todoRepository.delete(todo);
   }
 

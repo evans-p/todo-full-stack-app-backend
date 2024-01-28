@@ -45,7 +45,7 @@ public interface TodoService {
   /**
    * Deletes an existing Todo1.
    *
-   * @param todo todo1 to delete.
+   * @param id todo1 to delete.
    */
-  void delete(@NotNull(message = "{todo.null}") @Valid Todo todo);
+  void delete(@NotNull(message = "{id.null}") Long id);
 }

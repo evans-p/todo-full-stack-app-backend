@@ -110,7 +110,7 @@ class TestTodoServiceIT extends BaseITTest {
     list = todoListRepository.save(Samples.createSampleTodoList(SUB));
     todo = todoService.store(Samples.createSampleTodo(list.getTodoListId(), SUB));
 
-    todoService.delete(todo);
+    todoService.delete(todo.getTodoId());
 
     TodoList returned = todoListRepository.findAll().get(0);
     assertTrue(returned.getTodos().isEmpty());

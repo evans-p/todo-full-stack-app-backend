@@ -18,7 +18,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 @RequestMapping("todo-lists")
 public class TodoListController {
-
+  /**
+   * {@link TodoListService}.
+   */
   private final TodoListService service;
 
   @Autowired
