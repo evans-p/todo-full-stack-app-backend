@@ -24,15 +24,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Integration Tests for {@link TodoListController}
  */
-@SuppressWarnings({"nls", "unused"})
+@SuppressWarnings("nls")
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
 class TestTodoListController extends BaseITTest {
-  /**
-   * Base URI.
-   */
-  public static final String TODO_LISTS_BASE_URI = "/todo-lists/";
-
   /**
    * {@link TodoListService}.
    */
@@ -49,7 +44,7 @@ class TestTodoListController extends BaseITTest {
    * {@link MockMvc}.
    */
   @Autowired
-  private MockMvc mockMvc;
+  MockMvc mockMvc;
 
   /**
    * test for {@link TodoListController#readAll()}.

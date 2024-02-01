@@ -21,6 +21,17 @@ public abstract class BaseITTest extends BaseTest {
   public static final String SUB = "dummyUser";
 
   /**
+   * Base URI for todolist Controller.
+   */
+  public static final String TODO_LISTS_BASE_URI = "/todo-lists/";
+
+  /**
+   * Base URI for todo1 Controller.
+   */
+  public static final String TODOS_BASE_URI = "/todo-lists/";
+
+
+  /**
    * Creates token headers.
    *
    * @return Map<String, Object>
