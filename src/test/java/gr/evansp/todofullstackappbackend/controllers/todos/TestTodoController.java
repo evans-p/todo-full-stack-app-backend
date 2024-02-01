@@ -307,4 +307,205 @@ class TestTodoController extends BaseITTest {
             "{\"message\":null,\"messages\":{\"todoListId\":\"Το ID δεν μπορεί να είναι κενό.\",\"title\":\"Ο τίτλος δεν μπορεί να είναι κενός.\"}}".getBytes()))
         .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_NoTitleGreek() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .header("Accept-Language", "el-GR")
+            .content("{\"userId\": 1, \"todoListId\": 1}")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(content().bytes(
+            "{\"message\":null,\"messages\":{\"title\":\"Ο τίτλος δεν μπορεί να είναι κενός.\"}}".getBytes()))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_NoTitleEnglish() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .content("{\"userId\": 1, \"todoListId\": 1}")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(content().bytes(
+            "{\"message\":null,\"messages\":{\"title\":\"Title should not be empty.\"}}".getBytes()))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_AlreadyExistsEnglish() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .content("{\"userId\": 1, \"todoListId\": 1, \"title\": \"lalala\", \"todoId\": 1}")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(content().bytes(
+            "{\"message\":\"lalala already exists.\",\"messages\":null}".getBytes()))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isBadRequest());
+  }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_AlreadyExistsGreek() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .content("{\"userId\": 1, \"todoListId\": 1, \"title\": \"lalala\", \"todoId\": 1}")
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("Accept-Language", "el-GR"))
+        .andExpect(content().bytes(
+            "{\"message\":\"lalala υπάρχει ήδη.\",\"messages\":null}".getBytes()))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isBadRequest());
+  }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_NotTheOwnerGreek() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .content("{\"userId\": 1, \"todoListId\": 1, \"title\": \"lalala\"}")
+            .contentType(MediaType.APPLICATION_JSON)
+            .header("Accept-Language", "el-GR"))
+        .andExpect(content().bytes(
+            "{\"message\":\"Δεν έχετε πρόσβαση.\",\"messages\":null}".getBytes()))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_NotTheOwnerEnglish() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .content("{\"userId\": 1, \"todoListId\": 1, \"title\": \"lalala\"}")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(content().bytes(
+            "{\"message\":\"Access denied.\",\"messages\":null}".getBytes()))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+  }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_ListNotFound() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .content("{\"userId\": \"" + SUB + "\", \"todoListId\": 1, \"title\": \"lalala\"}")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(content().bytes(
+            "{\"message\":\"List was not found.\",\"messages\":null}".getBytes()))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isNotFound());
+  }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_NotTheOwnerOfTheList() throws Exception {
+    TodoList list = todoListRepository.save(Samples.createSampleTodoList("123"));
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .content("{\"userId\": \"" + SUB + "\", \"todoListId\": " + list.getTodoListId() + ", \"title\": \"lalala\"}")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(content().bytes(
+            "{\"message\":\"Access denied.\",\"messages\":null}".getBytes()))
+        .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isForbidden());
+
+    todoListRepository.delete(list);
+  }
+
+  /**
+   * test for {@link TodoController#create(Todo)}.
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testCreate_ok() throws Exception {
+    TodoList list = todoListRepository.save(Samples.createSampleTodoList(SUB));
+    mockMvc.perform(MockMvcRequestBuilders.post(TODOS_BASE_URI)
+            .content("{\"userId\": \"" + SUB + "\", \"todoListId\": " + list.getTodoListId() + ", \"title\": \"lalala\"}")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(content().contentType("application/hal+json"))
+        .andExpect(status().isOk());
+
+    todoListRepository.delete(list);
+  }
+
+
+  /**
+   * test for {@link TodoController#delete(Long)}
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testDelete_noListId() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.delete(TODOS_BASE_URI)
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isMethodNotAllowed())
+        .andExpect(content().bytes("{\"message\":\"Method not supported.\",\"messages\":null}".getBytes()));
+  }
+
+  /**
+   * test for {@link TodoController#delete(Long)}
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testDelete_badRequestUrl() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.delete(TODOS_BASE_URI + "/asdsad")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(content().bytes("{\"message\":\"Request can't be processed.\",\"messages\":null}".getBytes()))
+        .andExpect(status().isBadRequest());
+  }
+
+  /**
+   * test for {@link TodoController#delete(Long)}
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testDelete_notFound() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.delete(TODOS_BASE_URI + "-1"))
+        .andExpect(status().isNotFound())
+        .andExpect(content().bytes("{\"message\":\"Todo was not found.\",\"messages\":null}".getBytes()));
+  }
+
+  /**
+   * test for {@link TodoListController#delete(Long)}
+   *
+   * @throws Exception Exception
+   */
+  @Test
+  void testDelete_notFoundGreek() throws Exception {
+    mockMvc.perform(MockMvcRequestBuilders.delete(TODOS_BASE_URI + "-1")
+            .header("Accept-Language", "el-GR"))
+        .andExpect(status().isNotFound())
+        .andExpect(content().bytes("{\"message\":\"Η εργασία δεν βρέθηκε.\",\"messages\":null}".getBytes()));
+  }
 }

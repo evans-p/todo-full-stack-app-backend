@@ -452,7 +452,7 @@ class TestTodoListController extends BaseITTest {
    * @throws Exception Exception
    */
   @Test
-  void testDelete_notFound() throws Exception {
+  void testDelete_notFoundEnglish() throws Exception {
     mockMvc.perform(MockMvcRequestBuilders.delete(TODO_LISTS_BASE_URI + "/1"))
         .andExpect(status().isNotFound())
         .andExpect(content().bytes("{\"message\":\"List was not found.\",\"messages\":null}".getBytes()));

@@ -64,9 +64,9 @@ public class TodoServiceImpl implements TodoService {
     if (todo.getTodoId() != null) {
       throw new LogicException(LogicException.ALREADY_EXISTS, new Object[]{todo.getTitle()});
     }
+    ownershipService.checkOwnership(todo.getUserId());
     TodoList list = todoListService.find(todo.getTodoListId());
     ownershipService.checkOwnership(list.getUserId());
-    ownershipService.checkOwnership(todo.getUserId());
 
     return todoRepository.save(todo);
   }
