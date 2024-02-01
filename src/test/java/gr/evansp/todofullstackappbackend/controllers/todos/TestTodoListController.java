@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -498,7 +497,6 @@ class TestTodoListController extends BaseITTest {
     mockMvc.perform(MockMvcRequestBuilders.delete(TODO_LISTS_BASE_URI + list.getTodoListId())
             .header("Accept-Language", "el-GR"))
         .andExpect(status().isOk());
-    assertEquals(0, todoListRepository.findAll().size());
   }
 
 

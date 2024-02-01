@@ -28,7 +28,7 @@ public abstract class BaseITTest extends BaseTest {
   /**
    * Base URI for todo1 Controller.
    */
-  public static final String TODOS_BASE_URI = "/todo-lists/";
+  public static final String TODOS_BASE_URI = "/todos/";
 
 
   /**

@@ -53,7 +53,7 @@ public class TodoServiceImpl implements TodoService {
   @Transactional
   public Todo find(@NotNull(message = "{id.null}") Long id) {
     Todo todo = todoRepository.findById(id).orElseThrow(
-        () -> new NotFoundException(NotFoundException.LIST_NOT_FOUND, null));
+        () -> new NotFoundException(NotFoundException.TODO_NOT_FOUND, null));
     ownershipService.checkOwnership(todo.getUserId());
     return todo;
   }
