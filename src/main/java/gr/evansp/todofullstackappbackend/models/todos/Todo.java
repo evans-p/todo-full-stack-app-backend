@@ -4,26 +4,27 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 @Setter
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
 @Table(schema = "TODO", name = "TBTODO")
-@SuppressWarnings("com.haulmont.jpb.LombokEqualsAndHashCodeInspection")
 public class Todo {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "TODO_ID", nullable = false)
   @Min(value = 1L, message = "{id.min}")
-  @EqualsAndHashCode.Include
   private Long todoId;
 
   @Column(name = "LIST_ID", nullable = false)
@@ -55,4 +56,19 @@ public class Todo {
 
   @Column(name = "FAVOURITE")
   private Boolean favourite;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Todo todo = (Todo) o;
+
+    return Objects.equals(todoId, todo.todoId);
+  }
+
+  @Override
+  public int hashCode() {
+    return todoId != null ? todoId.hashCode() : 0;
+  }
 }
