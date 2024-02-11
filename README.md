@@ -3,9 +3,12 @@
 ## TODOS
 
 1. Add Maven Profiling for integration tests.
-2. Integrate Log4j.
+2. Integrate Log4j with aspect Oriented Programming.
 3. Integrate gmail SMTP server (Reports on what the user did per week).
 4. Add Authorization?
+5. Add image attachment functionality to the Todo
+6. Add caching with Redis
+7. More tests with Spok
 
 ## Class Diagram
 
