@@ -6,6 +6,7 @@
 2. Integrate Log4j.
 3. Integrate gmail SMTP server (Reports on what the user did per week).
 4. Add Authorization?
+5. OpenAPI/Swagger
 
 ## Class Diagram
 
