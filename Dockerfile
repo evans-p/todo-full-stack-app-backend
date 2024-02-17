@@ -6,7 +6,7 @@ COPY pom.xml .
 RUN mvn dependency:go-offline -B
 
 COPY src ./src
-RUN mvn clean package spring-boot:repackage -DskipTests
+RUN mvn clean package spring-boot:repackage -DskipTests -Pprod
 
 FROM openjdk:17
 WORKDIR /app
