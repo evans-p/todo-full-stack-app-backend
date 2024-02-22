@@ -9,7 +9,8 @@
 5. Add image attachment functionality to the Todo
 6. Add caching with Redis
 7. More tests with Spok
-
+8. Elastic + Kibana
+9. 
 ## Class Diagram
 
 ```mermaid
