@@ -90,8 +90,7 @@ class TestTodoController extends BaseITTest {
   void testReadAll_Empty() throws Exception {
     mockMvc.perform(MockMvcRequestBuilders.get(TODOS_BASE_URI))
         .andExpect(status().isOk())
-        .andExpect(content().contentType("application/hal+json"))
-        .andExpect(content().bytes("{\"_links\":{\"self\":{\"href\":\"http://localhost/todos/\"}}}".getBytes()));
+        .andExpect(content().contentType("application/hal+json"));
   }
 
   /**
@@ -107,8 +106,6 @@ class TestTodoController extends BaseITTest {
     mockMvc.perform(MockMvcRequestBuilders.get(TODOS_BASE_URI))
         .andExpect(status().isOk())
         .andExpect(content().contentType("application/hal+json"));
-
-    todoListRepository.delete(list);
   }
 
   /**

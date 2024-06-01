@@ -57,6 +57,9 @@ public class Todo {
   @Column(name = "FAVOURITE")
   private Boolean favourite;
 
+  @Column(name = "COMPLETED")
+  private Boolean completed;
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

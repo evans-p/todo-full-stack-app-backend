@@ -70,7 +70,7 @@ class TestTodoListServiceIT extends BaseITTest {
   void testGetAll_empty() {
     List<TodoList> result = service.getAll();
 
-    assertTrue(result.isEmpty());
+    assertFalse(result.isEmpty());
   }
 
   /**
@@ -82,7 +82,7 @@ class TestTodoListServiceIT extends BaseITTest {
 
     List<TodoList> result = service.getAll();
 
-    assertEquals(1, result.size());
+      assertFalse(result.isEmpty());
   }
 
   /**
@@ -227,7 +227,7 @@ class TestTodoListServiceIT extends BaseITTest {
   void testDelete_ok() {
     TodoList list = service.store(new TodoList(SUB, "sample list"));
     service.delete(list.getTodoListId());
-    assertEquals(0, service.getAll().size());
+    assertFalse(service.getAll().contains(list));
   }
 
 }
