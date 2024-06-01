@@ -83,6 +83,12 @@ class TestTodo extends BaseTest {
   }
 
   @Test
+  void testSetCompleted() {
+    todo.setCompleted(true);
+    assertEquals(true, todo.getCompleted());
+  }
+
+  @Test
   void testSetUserId() {
     todo.setUserId("123");
     assertEquals("123", todo.getUserId());
