@@ -3,6 +3,7 @@ package gr.evansp.todofullstackappbackend.exceptions;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/** {@link RuntimeException} to be thrown on Unauthorized actions. */
 @Getter
 @AllArgsConstructor
 public class UnauthorizedException extends RuntimeException {

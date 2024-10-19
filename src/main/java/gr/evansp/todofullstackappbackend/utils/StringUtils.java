@@ -2,15 +2,12 @@ package gr.evansp.todofullstackappbackend.utils;
 
 import java.util.Random;
 
-/**
- * Utilities regarding {@link String}.
- */
+/** Utilities regarding {@link String}. */
 public class StringUtils {
 
   private static final Random rnd = new Random();
-  /**
-   * Available characters.
-   */
+
+  /** Available characters. */
   private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".repeat(20);
 
   private StringUtils() {
@@ -18,8 +15,8 @@ public class StringUtils {
   }
 
   /**
-   * Generates a random string of specified length. Length must be greater than zero and smaller than 512.
-   * (0 < length <= 512).
+   * Generates a random string of specified length. Length must be greater than zero and smaller
+   * than 512. (0 < length <= 512).
    *
    * @param length length
    * @return String

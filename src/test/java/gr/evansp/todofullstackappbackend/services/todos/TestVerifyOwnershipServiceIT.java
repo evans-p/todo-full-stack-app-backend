@@ -1,5 +1,7 @@
 package gr.evansp.todofullstackappbackend.services.todos;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import gr.evansp.todofullstackappbackend.base.BaseITTest;
 import gr.evansp.todofullstackappbackend.exceptions.UnauthorizedException;
 import org.junit.jupiter.api.Test;
@@ -9,18 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-/**
- * Integration tests for {@link VerifyOwnershipService}
- */
+/** Integration tests for {@link VerifyOwnershipService} */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class TestVerifyOwnershipServiceIT extends BaseITTest {
 
-  @Autowired
-  VerifyOwnershipService service;
-
+  @Autowired VerifyOwnershipService service;
 
   @Test
   void testCheckOwnership_nullUserId() {

@@ -1,0 +1,65 @@
+stages:
+  - build
+  - lint
+  - static-analysis
+  - test
+
+.maven-template: &maven-template
+  image: maven:3.9.1
+  allow_failure: false
+
+.docker-template: &docker-template
+  image: docker:latest
+  services:
+    - docker:dind
+  allow_failure: true
+
+project-build:
+  <<: *maven-template
+  stage: build
+  script:
+    - mvn clean install
+  artifacts:
+    expire_in: 1 days
+    paths:
+      - target/
+
+image-build:
+  <<: *docker-template
+  stage: build
+  allow_failure: true
+  script:
+    - docker build -t todo-app .
+
+google-java-format:
+  <<: *maven-template
+  stage: lint
+  script:
+    - mvn spotless:check -DskipSpotlessCheck=false
+  allow_failure: true
+
+checkstyle:
+  <<: *maven-template
+  stage: lint
+  script:
+    - mvn checkstyle:check
+  allow_failure: true
+
+spotbugs:
+  <<: *maven-template
+  stage: static-analysis
+  dependencies:
+    - project-build
+  script:
+    - mvn spotbugs:check
+  allow_failure: true
+
+unit-tests:
+  <<: *maven-template
+  stage: test
+  script:
+    - mvn test -Punit-tests
+  artifacts:
+    expire_in: 1 days
+    paths:
+      - target/surefire-reports/*.xml

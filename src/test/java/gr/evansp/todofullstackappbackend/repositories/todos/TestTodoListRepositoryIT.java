@@ -1,8 +1,12 @@
 package gr.evansp.todofullstackappbackend.repositories.todos;
 
+import static org.junit.Assert.*;
+
 import gr.evansp.todofullstackappbackend.base.BaseITTest;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.samples.Samples;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -10,37 +14,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.Assert.*;
-
-/**
- * Integration tests for {@link TodoListRepository}.
- */
+/** Integration tests for {@link TodoListRepository}. */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class TestTodoListRepositoryIT extends BaseITTest {
 
-  /**
-   * User ID.
-   */
+  /** User ID. */
   public static final String userId = "1";
 
-  /**
-   * Subject under test.
-   */
-  @Autowired
-  TodoListRepository repository;
+  /** Subject under test. */
+  @Autowired TodoListRepository repository;
 
-  /**
-   * TodoList.
-   */
+  /** TodoList. */
   TodoList list;
 
-  /**
-   * Cleanup.
-   */
+  /** Cleanup. */
   @AfterEach
   void cleanup() {
     if (list != null) {
@@ -48,18 +36,14 @@ class TestTodoListRepositoryIT extends BaseITTest {
     }
   }
 
-  /**
-   * test for {@link TodoListRepository#findById(Object)}.
-   */
+  /** test for {@link TodoListRepository#findById(Object)}. */
   @Test
   void testFindById_notFound() {
     Optional<TodoList> result = repository.findById(0L);
     assertNull(result.orElse(null));
   }
 
-  /**
-   * test for {@link TodoListRepository#findById(Object)}.
-   */
+  /** test for {@link TodoListRepository#findById(Object)}. */
   @Test
   void testFindById_ok() {
     list = repository.save(Samples.createSampleTodoList(userId));
@@ -68,18 +52,14 @@ class TestTodoListRepositoryIT extends BaseITTest {
     assertTrue(result.isPresent());
   }
 
-  /**
-   * test for {@link TodoListRepository#findByUserId(String)}.
-   */
+  /** test for {@link TodoListRepository#findByUserId(String)}. */
   @Test
   void testFindByUserId_Empty() {
     List<TodoList> result = repository.findByUserId(userId);
     assertTrue(result.isEmpty());
   }
 
-  /**
-   * test for {@link TodoListRepository#findByUserId(String)}.
-   */
+  /** test for {@link TodoListRepository#findByUserId(String)}. */
   @Test
   void testFindByUserId_ok() {
     list = repository.save(Samples.createSampleTodoList(userId));
@@ -88,9 +68,7 @@ class TestTodoListRepositoryIT extends BaseITTest {
     assertEquals(1, result.size());
   }
 
-  /**
-   * test for {@link TodoListRepository#save(Object)}.
-   */
+  /** test for {@link TodoListRepository#save(Object)}. */
   @Test
   void testSave_ok() {
     list = repository.save(Samples.createSampleTodoList(userId));
@@ -99,9 +77,7 @@ class TestTodoListRepositoryIT extends BaseITTest {
     assertTrue(result.isPresent());
   }
 
-  /**
-   * test for {@link TodoListRepository#delete(Object)}.
-   */
+  /** test for {@link TodoListRepository#delete(Object)}. */
   @Test
   void testDelete_ok() {
     list = repository.save(Samples.createSampleTodoList(userId));

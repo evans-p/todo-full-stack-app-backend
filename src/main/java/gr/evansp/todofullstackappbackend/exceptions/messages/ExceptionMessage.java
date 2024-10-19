@@ -1,9 +1,9 @@
 package gr.evansp.todofullstackappbackend.exceptions.messages;
 
+import java.util.Map;
 import lombok.Getter;
 
-import java.util.Map;
-
+/** Message Bean te be returned when an exception occurs. */
 @Getter
 public class ExceptionMessage {
   private String message;

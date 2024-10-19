@@ -1,13 +1,11 @@
 package gr.evansp.todofullstackappbackend.utils;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/**
- * Tests for {@link StringUtils}
- */
+import org.junit.jupiter.api.Test;
+
+/** Tests for {@link StringUtils} */
 class TestStringUtils {
 
   @Test

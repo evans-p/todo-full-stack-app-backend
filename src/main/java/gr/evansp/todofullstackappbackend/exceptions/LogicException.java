@@ -3,9 +3,7 @@ package gr.evansp.todofullstackappbackend.exceptions;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-/**
- * Exception to be thrown when a logic error arises.
- */
+/** Exception to be thrown when a logic error arises. */
 @Getter
 @AllArgsConstructor
 public class LogicException extends RuntimeException {

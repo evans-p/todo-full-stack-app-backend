@@ -1,14 +1,11 @@
 package gr.evansp.todofullstackappbackend.repositories.todos;
 
 import gr.evansp.todofullstackappbackend.models.todos.Todo;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-/**
- * Repository for Todo1.
- */
+/** Repository for Todo1. */
 @SuppressWarnings("unused")
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {

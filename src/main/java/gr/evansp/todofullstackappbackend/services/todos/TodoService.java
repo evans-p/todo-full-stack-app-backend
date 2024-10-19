@@ -3,12 +3,9 @@ package gr.evansp.todofullstackappbackend.services.todos;
 import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-
 import java.util.List;
 
-/**
- * Service for CRUD operations regarding Todo1.
- */
+/** Service for CRUD operations regarding Todo1. */
 public interface TodoService {
 
   /**

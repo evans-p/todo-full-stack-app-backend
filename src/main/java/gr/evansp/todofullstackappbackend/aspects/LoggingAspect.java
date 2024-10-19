@@ -8,18 +8,18 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+/** {@link Aspect} for logging purposes. */
 @SuppressWarnings("unused")
 @Aspect
 @Component
 public class LoggingAspect {
 
-  /**
-   * Aspect Logger
-   */
+  /** Aspect Logger. */
   private static final Logger logger = LoggerFactory.getLogger(LoggingAspect.class);
 
+  /** Method to check for Unauthorized access. */
   @AfterThrowing("execution( * *..checkOwnership(..))")
-  public void before() {
+  public void afterUnauthorizedAccess() {
 
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

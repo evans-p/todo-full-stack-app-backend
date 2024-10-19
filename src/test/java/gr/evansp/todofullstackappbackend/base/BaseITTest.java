@@ -1,5 +1,8 @@
 package gr.evansp.todofullstackappbackend.base;
 
+import java.time.Instant;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.security.core.context.SecurityContext;
@@ -7,29 +10,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
-
-/**
- * Base class for all IT tests.
- */
+/** Base class for all IT tests. */
 public abstract class BaseITTest extends BaseTest {
-  /**
-   * User ID.
-   */
+  /** User ID. */
   public static final String SUB = "dummyUser";
 
-  /**
-   * Base URI for todolist Controller.
-   */
+  /** Base URI for todolist Controller. */
   public static final String TODO_LISTS_BASE_URI = "/todo-lists/";
 
-  /**
-   * Base URI for todo1 Controller.
-   */
+  /** Base URI for todo1 Controller. */
   public static final String TODOS_BASE_URI = "/todos/";
-
 
   /**
    * Creates token headers.
@@ -54,9 +44,7 @@ public abstract class BaseITTest extends BaseTest {
     return headers;
   }
 
-  /**
-   * Auth setup
-   */
+  /** Auth setup */
   @BeforeEach
   void setupAuthorization() {
 
@@ -66,13 +54,10 @@ public abstract class BaseITTest extends BaseTest {
     SecurityContext context = SecurityContextHolder.createEmptyContext();
     context.setAuthentication(token);
 
-
     SecurityContextHolder.setContext(context);
   }
 
-  /**
-   * Auth cleanup.
-   */
+  /** Auth cleanup. */
   @AfterEach
   void cleanupAuthorization() {
     SecurityContextHolder.clearContext();

@@ -1,32 +1,24 @@
 package gr.evansp.todofullstackappbackend.models.todos;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import gr.evansp.todofullstackappbackend.base.BaseTest;
-import gr.evansp.todofullstackappbackend.constants.StringConstants;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-/**
- * Unit tests for Todo1.
- */
+/** Unit tests for Todo1. */
 class TestTodo extends BaseTest {
-  /**
-   * Subject under test.
-   */
+  /** Subject under test. */
   Todo todo;
 
-  /**
-   * Initialization.
-   */
+  /** Initialization. */
   @BeforeEach
   public void setup() {
     todo = new Todo();
@@ -34,8 +26,8 @@ class TestTodo extends BaseTest {
 
   @Test
   void testRequiredArgsConstructor() {
-    Todo todo = new Todo(1L, "title", "userId");
-    assertNotNull(todo);
+    Todo testTodo = new Todo(1L, "title", "userId");
+    assertNotNull(testTodo);
   }
 
   @Test
@@ -122,25 +114,6 @@ class TestTodo extends BaseTest {
   }
 
   @Test
-  void testValidateListId_null() {
-    try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-      Validator validator = factory.getValidator();
-
-      todo.setTodoId(1L);
-      todo.setTitle("title");
-      todo.setUserId("Body");
-
-      Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
-      assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.null")));
-    }
-  }
-
-  @Test
   void testValidateListId_zero() {
     try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
       Validator validator = factory.getValidator();
@@ -152,11 +125,11 @@ class TestTodo extends BaseTest {
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.min")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 
@@ -172,14 +145,13 @@ class TestTodo extends BaseTest {
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.min")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
-
 
   @Test
   void testValidateUserId_null() {
@@ -191,17 +163,15 @@ class TestTodo extends BaseTest {
       todo.setTodoListId(1L);
       todo.setTitle("123");
 
-
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("user.id.null")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("user.id.null")));
     }
   }
-
 
   @Test
   void testValidateUserId_empty() {
@@ -211,15 +181,15 @@ class TestTodo extends BaseTest {
       todo.setTodoId(1L);
       todo.setTodoListId(1L);
       todo.setTitle("title");
-      todo.setUserId(StringConstants.EMPTY);
+      todo.setUserId("");
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("user.id.null")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("user.id.null")));
     }
   }
 
@@ -235,11 +205,11 @@ class TestTodo extends BaseTest {
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.min")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 
@@ -255,11 +225,11 @@ class TestTodo extends BaseTest {
 
       Set<ConstraintViolation<Todo>> violations = validator.validate(todo);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.min")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 }

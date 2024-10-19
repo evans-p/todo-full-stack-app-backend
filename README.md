@@ -3,15 +3,12 @@
 ## TODOS
 
 1. Add API call cashing with Redis (https://medium.com/simform-engineering/spring-boot-caching-with-redis-1a36f719309f)
-1. Elastic + Kibana
-1. Integrate gmail SMTP server (Reports on what the user did per week).
-1. Send an email every Monday for the the tasks ahead
-1. Add Authorization?
-1. Add image attachment functionality to the Todo
-1. More tests with Spok
-1. Gitlab CI
-   1. On each commit run all the unit tests of the changed modules.
-1. linting with google-java-formatter.
+2. Elastic + Kibana
+3. Integrate gmail SMTP server (Reports on what the user did per week).
+4. Send an email every Monday for the the tasks ahead
+5. Add Authorization?
+6. Add image attachment functionality to the Todo
+7. More tests with Spok
 
 ## Class Diagram
 

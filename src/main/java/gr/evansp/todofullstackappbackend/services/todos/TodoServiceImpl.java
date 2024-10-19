@@ -9,41 +9,41 @@ import gr.evansp.todofullstackappbackend.repositories.todos.TodoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-/**
- * Implementation of {@link TodoService}.
- */
+/** Implementation of {@link TodoService}. */
 @SuppressWarnings("unused")
 @Service
 @Validated
 public class TodoServiceImpl implements TodoService {
 
-  /**
-   * {@link TodoRepository}.
-   */
+  /** {@link TodoRepository}. */
   TodoRepository todoRepository;
 
-  /**
-   * {@link TodoListService}
-   */
+  /** {@link TodoListService}. */
   TodoListService todoListService;
 
-  /**
-   * {@link VerifyOwnershipService}
-   */
+  /** {@link VerifyOwnershipService}. */
   VerifyOwnershipService ownershipService;
 
+  /**
+   * Public constructor.
+   *
+   * @param todoRepository {@link TodoRepository}.
+   * @param ownershipService {@link VerifyOwnershipService}.
+   * @param todoListService {@link TodoListService}.
+   */
   @Autowired
-  public TodoServiceImpl(TodoRepository todoRepository, VerifyOwnershipService ownershipService,
-                         TodoListService todoListService) {
+  public TodoServiceImpl(
+      TodoRepository todoRepository,
+      VerifyOwnershipService ownershipService,
+      TodoListService todoListService) {
     this.todoRepository = todoRepository;
     this.ownershipService = ownershipService;
     this.todoListService = todoListService;
@@ -52,8 +52,10 @@ public class TodoServiceImpl implements TodoService {
   @Override
   @Transactional
   public Todo find(@NotNull(message = "{id.null}") Long id) {
-    Todo todo = todoRepository.findById(id).orElseThrow(
-        () -> new NotFoundException(NotFoundException.TODO_NOT_FOUND, null));
+    Todo todo =
+        todoRepository
+            .findById(id)
+            .orElseThrow(() -> new NotFoundException(NotFoundException.TODO_NOT_FOUND, null));
     ownershipService.checkOwnership(todo.getUserId());
     return todo;
   }
@@ -62,7 +64,7 @@ public class TodoServiceImpl implements TodoService {
   @Transactional
   public Todo store(@NotNull(message = "{todo.null}") @Valid Todo todo) {
     if (todo.getTodoId() != null) {
-      throw new LogicException(LogicException.ALREADY_EXISTS, new Object[]{todo.getTitle()});
+      throw new LogicException(LogicException.ALREADY_EXISTS, new Object[] {todo.getTitle()});
     }
     ownershipService.checkOwnership(todo.getUserId());
     TodoList list = todoListService.find(todo.getTodoListId());
@@ -75,7 +77,7 @@ public class TodoServiceImpl implements TodoService {
   @Transactional
   public Todo update(@NotNull(message = "{todo.null}") @Valid Todo todo) {
     if (todo.getTodoId() == null) {
-      throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[]{todo.getTitle()});
+      throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[] {todo.getTitle()});
     }
     TodoList list = todoListService.find(todo.getTodoListId());
     ownershipService.checkOwnership(list.getUserId());

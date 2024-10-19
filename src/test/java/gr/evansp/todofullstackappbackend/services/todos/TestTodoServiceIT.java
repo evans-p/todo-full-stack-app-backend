@@ -1,5 +1,7 @@
 package gr.evansp.todofullstackappbackend.services.todos;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import gr.evansp.todofullstackappbackend.base.BaseITTest;
 import gr.evansp.todofullstackappbackend.exceptions.LogicException;
 import gr.evansp.todofullstackappbackend.exceptions.NotFoundException;
@@ -9,6 +11,7 @@ import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.repositories.todos.TodoListRepository;
 import gr.evansp.todofullstackappbackend.repositories.todos.TodoRepository;
 import gr.evansp.todofullstackappbackend.samples.Samples;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -17,47 +20,26 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-/**
- * Integration tests for {@link TodoService}.
- */
+/** Integration tests for {@link TodoService}. */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class TestTodoServiceIT extends BaseITTest {
-  /**
-   * {@link TodoService}.
-   */
-  @Autowired
-  TodoService todoService;
+  /** {@link TodoService}. */
+  @Autowired TodoService todoService;
 
-  /**
-   * {@link TodoRepository}.
-   */
-  @Autowired
-  TodoRepository todoRepository;
+  /** {@link TodoRepository}. */
+  @Autowired TodoRepository todoRepository;
 
-  /**
-   * {@link TodoListRepository}.
-   */
-  @Autowired
-  TodoListRepository todoListRepository;
+  /** {@link TodoListRepository}. */
+  @Autowired TodoListRepository todoListRepository;
 
-  /**
-   * Todo1
-   */
+  /** Todo1 */
   Todo todo;
 
-  /**
-   * {@link TodoList}.
-   */
+  /** {@link TodoList}. */
   TodoList list;
 
-  /**
-   * Cleanup
-   */
+  /** Cleanup */
   @AfterEach
   void cleanup() {
     if (list != null) {
@@ -65,9 +47,7 @@ class TestTodoServiceIT extends BaseITTest {
     }
   }
 
-  /**
-   * Test for {@link TodoService#getAll()}
-   */
+  /** Test for {@link TodoService#getAll()} */
   @Test
   void testGetAll_unauthorized() {
     SecurityContextHolder.clearContext();
@@ -76,35 +56,29 @@ class TestTodoServiceIT extends BaseITTest {
     assertEquals(UnauthorizedException.UNAUTHORIZED, e.getMessage());
   }
 
-  /**
-   * Test for {@link TodoService#getAll()}
-   */
+  /** Test for {@link TodoService#getAll()} */
   @Test
   void testGetAll_empty() {
     List<Todo> result = todoService.getAll();
 
-    assertFalse(result.isEmpty());
+    assertTrue(result.isEmpty());
   }
 
-  /**
-   * Test for {@link TodoService#getAll()}
-   */
+  /** Test for {@link TodoService#getAll()} */
   @Test
   void testGetAll_ok() {
     list = todoListRepository.save(Samples.createSampleTodoList(SUB));
     todo = todoRepository.save(Samples.createSampleTodo(list.getTodoListId(), SUB));
 
     List<Todo> result = todoService.getAll();
-      assertFalse(result.isEmpty());
+    assertFalse(result.isEmpty());
 
     list = todoListRepository.findById(list.getTodoListId()).orElseThrow();
 
     assertTrue(list.getTodos().contains(todo));
   }
 
-  /**
-   * Test for {@link TodoService#getAll()}
-   */
+  /** Test for {@link TodoService#getAll()} */
   @Test
   void testDelete_ok() {
     list = todoListRepository.save(Samples.createSampleTodoList(SUB));
@@ -116,17 +90,13 @@ class TestTodoServiceIT extends BaseITTest {
     assertFalse(returned.getTodos().contains(todo));
   }
 
-  /**
-   * Test for {@link TodoService#find(Long)}
-   */
+  /** Test for {@link TodoService#find(Long)} */
   @Test
   void testFind_notFound() {
     assertThrows(NotFoundException.class, () -> todoService.find(-1L));
   }
 
-  /**
-   * Test for {@link TodoService#find(Long)}
-   */
+  /** Test for {@link TodoService#find(Long)} */
   @Test
   void testFind_ok() {
     list = todoListRepository.save(Samples.createSampleTodoList(SUB));
@@ -135,45 +105,36 @@ class TestTodoServiceIT extends BaseITTest {
     assertEquals(todo, todoService.find(todo.getTodoId()));
   }
 
-  /**
-   * Test for {@link TodoService#store(Todo)}
-   */
+  /** Test for {@link TodoService#store(Todo)} */
   @Test
   void testStore_alreadyExists() {
-    Todo todo = Samples.createSampleTodo(1L, "Sub");
-    todo.setTodoId(1L);
-    assertThrows(LogicException.class, () -> todoService.store(todo));
+    Todo todo1 = Samples.createSampleTodo(1L, "Sub");
+    todo1.setTodoId(1L);
+    assertThrows(LogicException.class, () -> todoService.store(todo1));
   }
 
-  /**
-   * Test for {@link TodoService#store(Todo)}
-   */
+  /** Test for {@link TodoService#store(Todo)} */
   @Test
   void testStore_ok() {
     list = todoListRepository.save(Samples.createSampleTodoList(SUB));
     todo = todoService.store(Samples.createSampleTodo(list.getTodoListId(), SUB));
-    list = todoListRepository
-            .findAll()
-            .stream()
-            .filter((l)->l.getTodoListId().equals(list.getTodoListId()))
+    list =
+        todoListRepository.findAll().stream()
+            .filter(l -> l.getTodoListId().equals(list.getTodoListId()))
             .toList()
             .get(0);
 
     assertTrue(list.getTodos().contains(todo));
   }
 
-  /**
-   * Test for {@link TodoService#update(Todo)}
-   */
+  /** Test for {@link TodoService#update(Todo)} */
   @Test
   void testUpdate_doesNotExist() {
-    Todo todo = Samples.createSampleTodo(1L, "Sub");
-    assertThrows(LogicException.class, () -> todoService.update(todo));
+    Todo todo1 = Samples.createSampleTodo(1L, "Sub");
+    assertThrows(LogicException.class, () -> todoService.update(todo1));
   }
 
-  /**
-   * Test for {@link TodoService#update(Todo)} (Todo)}
-   */
+  /** Test for {@link TodoService#update(Todo)} (Todo)} */
   @Test
   void testUpdate_ok() {
     list = todoListRepository.save(Samples.createSampleTodoList(SUB));
@@ -184,5 +145,4 @@ class TestTodoServiceIT extends BaseITTest {
 
     assertEquals("LALALA", todo.getTitle());
   }
-
 }

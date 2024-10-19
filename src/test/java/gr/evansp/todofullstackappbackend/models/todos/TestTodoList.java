@@ -1,33 +1,26 @@
 package gr.evansp.todofullstackappbackend.models.todos;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import gr.evansp.todofullstackappbackend.base.BaseTest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-/**
- * Unit tests for {@link TodoList}.
- */
+/** Unit tests for {@link TodoList}. */
 class TestTodoList extends BaseTest {
 
-  /**
-   * Subject under test.
-   */
+  /** Subject under test. */
   TodoList list;
 
-  /**
-   * Initialization.
-   */
+  /** Initialization. */
   @BeforeEach
   public void setup() {
     list = new TodoList();
@@ -127,11 +120,11 @@ class TestTodoList extends BaseTest {
 
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.min")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 
@@ -145,11 +138,11 @@ class TestTodoList extends BaseTest {
 
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("id.min")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("id.min")));
     }
   }
 
@@ -163,11 +156,11 @@ class TestTodoList extends BaseTest {
 
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("user.id.null")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("user.id.null")));
     }
   }
 
@@ -178,14 +171,13 @@ class TestTodoList extends BaseTest {
 
       list = new TodoList("", "sample list");
 
-
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("user.id.null")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("user.id.null")));
     }
   }
 
@@ -199,14 +191,13 @@ class TestTodoList extends BaseTest {
 
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("title.empty")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("title.empty")));
     }
   }
-
 
   @Test
   void testValidate_emptyTitle() {
@@ -217,11 +208,11 @@ class TestTodoList extends BaseTest {
 
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("title.empty")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("title.empty")));
     }
   }
 
@@ -235,14 +226,13 @@ class TestTodoList extends BaseTest {
 
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("create.date.null")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("create.date.null")));
     }
   }
-
 
   @Test
   void testValidate_nullLastModified() {
@@ -254,11 +244,11 @@ class TestTodoList extends BaseTest {
 
       Set<ConstraintViolation<TodoList>> violations = validator.validate(list);
       assertEquals(1, violations.size());
-      assertTrue(violations
-          .stream()
-          .map(ConstraintViolation::getMessage)
-          .collect(Collectors.toSet())
-          .contains(VALIDATION_MESSAGES.getString("last.modified.date.null")));
+      assertTrue(
+          violations.stream()
+              .map(ConstraintViolation::getMessage)
+              .collect(Collectors.toSet())
+              .contains(VALIDATION_MESSAGES.getString("last.modified.date.null")));
     }
   }
 }

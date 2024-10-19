@@ -8,35 +8,29 @@ import gr.evansp.todofullstackappbackend.repositories.todos.TodoListRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-/**
- * Implementation of {@link TodoListService}.
- */
+/** Implementation of {@link TodoListService}. */
 @SuppressWarnings("unused")
 @Service
 @Validated
 public class TodoListServiceImpl implements TodoListService {
 
-  /**
-   * {@link TodoListRepository}
-   */
+  /** {@link TodoListRepository}. */
   TodoListRepository todoListRepository;
 
-  /**
-   * {@link VerifyOwnershipService}
-   */
+  /** {@link VerifyOwnershipService}. */
   VerifyOwnershipService ownershipService;
 
   @Autowired
-  public TodoListServiceImpl(TodoListRepository todoListRepository, VerifyOwnershipService ownershipService) {
+  public TodoListServiceImpl(
+      TodoListRepository todoListRepository, VerifyOwnershipService ownershipService) {
     this.todoListRepository = todoListRepository;
     this.ownershipService = ownershipService;
   }
@@ -55,8 +49,10 @@ public class TodoListServiceImpl implements TodoListService {
   @Override
   @Transactional
   public TodoList find(@NotNull(message = "{id.null}") Long id) {
-    TodoList list = todoListRepository.findById(id).orElseThrow(
-        () -> new NotFoundException(NotFoundException.LIST_NOT_FOUND, null));
+    TodoList list =
+        todoListRepository
+            .findById(id)
+            .orElseThrow(() -> new NotFoundException(NotFoundException.LIST_NOT_FOUND, null));
     ownershipService.checkOwnership(list.getUserId());
     return list;
   }
@@ -65,7 +61,7 @@ public class TodoListServiceImpl implements TodoListService {
   @Transactional
   public TodoList store(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList) {
     if (todoList.getTodoListId() != null) {
-      throw new LogicException(LogicException.ALREADY_EXISTS, new Object[]{todoList.getTitle()});
+      throw new LogicException(LogicException.ALREADY_EXISTS, new Object[] {todoList.getTitle()});
     }
     ownershipService.checkOwnership(todoList.getUserId());
     return todoListRepository.save(todoList);
@@ -75,7 +71,7 @@ public class TodoListServiceImpl implements TodoListService {
   @Transactional
   public TodoList update(@NotNull(message = "{todo.list.null}") @Valid TodoList todoList) {
     if (todoList.getTodoListId() == null) {
-      throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[]{todoList.getTitle()});
+      throw new LogicException(LogicException.DOES_NOT_EXIST, new Object[] {todoList.getTitle()});
     }
     TodoList retrieved = find(todoList.getTodoListId());
 

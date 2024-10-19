@@ -1,5 +1,6 @@
 package gr.evansp.todofullstackappbackend.services.todos;
 
+/** Service for Resource Ownership check. */
 public interface VerifyOwnershipService {
 
   /**

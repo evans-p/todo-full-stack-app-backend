@@ -4,16 +4,12 @@ import gr.evansp.todofullstackappbackend.models.todos.Todo;
 import gr.evansp.todofullstackappbackend.models.todos.TodoList;
 import gr.evansp.todofullstackappbackend.utils.StringUtils;
 
-/**
- * Sample creation
- */
+/** Sample creation */
 public class Samples {
 
-  /**
-   * Private NoArgConstructor
-   */
+  /** Private NoArgConstructor */
   private Samples() {
-    //EMPTY
+    // EMPTY
   }
 
   /**
@@ -33,7 +29,6 @@ public class Samples {
    * @return Todo1.
    */
   public static Todo createSampleTodo(Long listId, String userId) {
-    return new Todo(listId, StringUtils.generateRandomString(10),
-        userId);
+    return new Todo(listId, StringUtils.generateRandomString(10), userId);
   }
 }
